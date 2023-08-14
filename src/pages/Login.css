@@ -1,0 +1,336 @@
+/* .login-page {
+    font-family: sans-serif;
+  
+}
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 440px;
+    padding: 60px;
+    transform: translate(-50%, -50%);
+ 
+    background: black;
+    border-radius: 10px;
+}
+
+.heading-login-box {
+ 
+    margin-bottom: 90px;
+    font-weight: bold;
+   
+    color: #fff;
+    text-align: center;
+}
+
+.user-box {
+    position: relative;
+}
+
+.user-box-input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.user-box-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #8ab0df;
+    font-size: 12px;
+}
+
+.login-box-button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #8ab0df;
+    font-size: 14px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 30px;
+}
+
+.login-box button:hover {
+    background: #8ab0df;
+    color: #fff;
+}
+
+.login-box button span {
+    position: absolute;
+    display: block;
+}
+
+.login-box-button span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #1257ac);
+    animation: btn-1 1.7s linear infinite;
+}
+
+@keyframes btn-1 {
+    0% {
+        left: -100%;
+    }
+
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.login-box-button span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #8ab0df);
+    animation: btn-2 1.7s linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes btn-2 {
+    0% {
+        top: -100%;
+    }
+
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.login-box-button span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, );
+    animation: btn-3 1.7s linear infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes btn-3 {
+    0% {
+        right: -100%;
+    }
+
+    50%,
+    100% {
+        right: 100%;
+    }
+}
+
+.login-box-button span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #8ab0df);
+    animation: btn-4 1.7s linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes btn-4 {
+    0% {
+        bottom: -100%;
+    }
+
+    50%,
+    100% {
+        bottom: 100%;
+    }
+}
+@media screen and (max-width: 576px) and (min-width: 400px) {
+    .login-box {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .login-box {
+        width: 200px;
+    }
+
+    .heading-login-box {
+        font-size: 16px !important;
+    }
+
+    .user-box-input {
+        font-size: 12px;
+    }
+
+    .user-box-label {
+        font-size: 22px;
+    }
+    .login-box-button {
+        font-size: 12px;
+    }
+} */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #222;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  /* width: 600px; */
+  width: 50%;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 36px;
+  color: #b38bff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  /* margin-bottom: 10px; */
+  margin-top:17px;
+  font-size: 18px;
+}
+
+input {
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #555;
+}
+
+button {
+  padding: 10px;
+  /* background-color: #b38bff; */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  /* transition: background-color 0.2s ease-in-out; */
+  background-color: #8c5fb2;
+}
+
+/* button:hover {
+    background-color: #8c5fb2;
+  } */
+
+a {
+  text-decoration: none;
+  color: #b38bff;
+  font-size: 18px;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #8c5fb2;
+}
+
+p {
+  text-align: center;
+  margin: 8px;
+}
+.btn-login {
+  background-color: rgb(3, 201, 215);
+  transition: all , 0.3s;
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+.btn-login:hover{
+    background-color: #0b7285;
+} 
+
+.error-login{
+    text-align: left;
+    color: #e03131;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.error-input{
+    border-bottom: 1px solid #e03131;
+}
+.loginForm input:focus{
+outline: 1px solid #1098ad;
+}
+.fade-in {
+	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2023-7-3 19:5:6
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation fade-in
+ * ----------------------------------------
+ */
+ @-webkit-keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

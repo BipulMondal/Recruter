@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import HttpClient from "../../components/HttpClient";
+import { GiFlowerStar } from "react-icons/gi";
 
 const AddApplicant = () => {
   const [applicantData, setApplicantData] = useState({
@@ -102,25 +103,48 @@ const AddApplicant = () => {
   // submit ApplicantData
   const handleApplicantSubmit = async (e) => {
     e.preventDefault();
-    let data = {
-      firstname: applicantData.firstname,
-      lastname: applicantData.lastname,
-      email: applicantData.email,
-      mobile: applicantData.phone,
-      experience: applicantData.experience,
-      gender: applicantData.gender,
-      summery: applicantData.profile,
-      qualification: applicantData.qualification,
-      currlocation: applicantData.location,
-      keytech: applicantData.keytech,
-      keywords: applicantData.keyword,
-      dob: applicantData.dob,
-      relocate: applicantData.relocate,
-      profile: applicantData.resume,
-      availableDate: applicantData.available_date,
-      categoryid: selectCategory._id,
-      subcategoryid: selectSubCategory._id,
-    };
+
+    if (
+      !applicantData.firstname ||
+      !applicantData.lastname ||
+      !applicantData.email ||
+      !applicantData.phone ||
+      !applicantData.experience ||
+      !applicantData.gender ||
+      !applicantData.dob ||
+      !applicantData.qualification ||
+      !applicantData.category ||
+      !applicantData.sub_category ||
+      !applicantData.keyword ||
+      !applicantData.keytech ||
+      !applicantData.location ||
+      !applicantData.profile ||
+      applicantData.relocate === null ||
+      applicantData.resume === null ||
+      !applicantData.available_date
+    ) {
+      // setError("Fields are required");
+      alert("All * fields are required");
+    } else {
+      let data = {
+        firstname: applicantData.firstname,
+        lastname: applicantData.lastname,
+        email: applicantData.email,
+        mobile: applicantData.phone,
+        experience: applicantData.experience,
+        gender: applicantData.gender,
+        summery: applicantData.profile,
+        qualification: applicantData.qualification,
+        currlocation: applicantData.location,
+        keytech: applicantData.keytech,
+        keywords: applicantData.keyword,
+        dob: applicantData.dob,
+        relocate: applicantData.relocate,
+        profile: applicantData.resume,
+        availableDate: applicantData.available_date,
+        categoryid: selectCategory ? selectCategory._id : null,
+        subcategoryid: selectSubCategory ? selectSubCategory._id : null,
+      };
 
       console.log(data);
       let result = await HttpClient.requestData("consultant", "POST", data);
@@ -151,6 +175,7 @@ const AddApplicant = () => {
         toast.error("Applicat Added Successfully");
         console.log("Applicat Added failes");
       }
+    }
   };
 
   // upload resume
@@ -183,8 +208,12 @@ const AddApplicant = () => {
         {/* name */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter First Name</label>
-            <br />
+            <div className="flex justify-between">
+              <label htmlFor="">Enter First Name</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.firstname}
@@ -199,8 +228,12 @@ const AddApplicant = () => {
             />
           </div>
           <div className="">
-            <label htmlFor="">Enter Last Name</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Last Name</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.lastname}
@@ -215,8 +248,12 @@ const AddApplicant = () => {
         {/* gmail and phone */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Email</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Email</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="email"
               value={applicantData.email}
@@ -228,8 +265,12 @@ const AddApplicant = () => {
             />
           </div>
           <div>
-            <label htmlFor="">Enter Phone </label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Mobile</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="Phone"
               value={applicantData.phone}
@@ -244,8 +285,12 @@ const AddApplicant = () => {
         {/* gender and D.O.B */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Select Gender</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Gender</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <div className="bg-white h-12 w-[25rem] rounded">
               <input
                 type="radio"
@@ -271,8 +316,12 @@ const AddApplicant = () => {
             </div>
           </div>
           <div>
-            <label htmlFor="">Enter D.O.B</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Date Of Birth</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="date"
               className="w-[25rem] bg-white text-black"
@@ -284,8 +333,12 @@ const AddApplicant = () => {
         {/* qualification and experience */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Last Qualification</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Last Qualification</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.qualification}
@@ -300,8 +353,12 @@ const AddApplicant = () => {
             />
           </div>
           <div>
-            <label htmlFor="">Enter Experience </label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Experience</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.experience}
@@ -319,8 +376,12 @@ const AddApplicant = () => {
         {/* category and subcategory */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Select Skills</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Select Skills</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <select
               name="category"
               id="category"
@@ -339,8 +400,12 @@ const AddApplicant = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="">Select Sub Skills</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Select Sub Skills</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <select
               name="subSkills"
               id="subSkills"
@@ -362,8 +427,12 @@ const AddApplicant = () => {
         {/* key technology and keyword */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Key Technologies</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Key Technologies</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.keytech}
@@ -378,8 +447,12 @@ const AddApplicant = () => {
             />
           </div>
           <div>
-            <label htmlFor="">Enter Key Word </label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Key Word</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.keyword}
@@ -398,8 +471,12 @@ const AddApplicant = () => {
         {/* location and relocate*/}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Current Location</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Current Location</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               value={applicantData.location}
@@ -412,8 +489,12 @@ const AddApplicant = () => {
           </div>
 
           <div>
-            <label htmlFor="">Willing to Relocate ?</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Willing to relocate</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <div className="bg-white h-12 w-[25rem] rounded">
               <input
                 type="radio"
@@ -446,8 +527,12 @@ const AddApplicant = () => {
         {/* profile summary and availabledate */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Profile Summary</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Enter Profile Summary</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <textarea
               name=""
               id=""
@@ -463,8 +548,12 @@ const AddApplicant = () => {
           </div>
 
           <div>
-            <label htmlFor="">Available date</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Available date</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="text"
               className="bg-white text-black h-12 w-[25rem] rounded"
@@ -481,8 +570,12 @@ const AddApplicant = () => {
         {/* Resume */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Browse Resume</label>
-            <br />
+          <div className="flex justify-between">
+              <label htmlFor="">Browse Resume</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+            </div>
             <input
               type="file"
               accept=".pdf,.doc,.docx"

@@ -321,11 +321,8 @@ const Sidebar = () => {
                   <Link to={"/add-applicant"} className="linkAn">
                     Add Consultant
                   </Link>
-                  <Link to={"/edit-consultant"} className="linkAn">
-                    Edit Applicant
-                  </Link>
                   <Link to={"/manage-consultant"} className="linkAn">
-                    Manage Applicant
+                    Manage Consultant
                   </Link>
                 </div>
               ) : null}

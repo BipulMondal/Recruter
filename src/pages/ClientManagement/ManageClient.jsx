@@ -13,7 +13,7 @@ const ManageSubCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchSubCategoryData();
+    fetchClientData();
   }, [status]);
 
   const onClientDelete = async (clientId) => {
@@ -26,13 +26,13 @@ const ManageSubCategory = () => {
     console.log("Delete", result);
     if (result && result.status) {
       toast.success(result.message);
-      fetchSubCategoryData();
+      fetchClientData();
     } else {
       toast.error("Failed to delete subCategary data");
     }
   };
 
-  const fetchSubCategoryData = async () => {
+  const fetchClientData = async () => {
     let result = await HttpClient.requestData("client", "GET");
 
     console.log("client result", result.data)
@@ -149,7 +149,7 @@ const ManageSubCategory = () => {
     )
   );
 
-  await fetchSubCategoryData();
+  await fetchClientData();
   };
 
 

@@ -1,92 +1,230 @@
 import React, { useState, useEffect } from "react";
 import HttpClient from "../../components/HttpClient";
 import { Link } from "react-router-dom";
+import { Header } from "../../components";
+import DataTable from "react-data-table-component";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ManageConsultant = () => {
   const [consultantData, setConsultantData] = useState([]);
+  const [status, setStatus] = useState(false);
 
 
-  const fetchConsultantdata = async () => {
-    let result = await HttpClient.requestData("consultant", "GET");
-    console.log("viewconsultantdata", result.data);
-    setConsultantData(result.data);
-  };
+  useEffect(() => {
+    fetchConsultantData();
+  }, [status]);
 
 
   const handleConsultantDelete = async (itemId) => {
+    alert("Are you really want to delete this client ?");
+     let result = HttpClient.requestData(`/.../${itemId}`, "DELETE")
+   }
 
-   alert("Are you really want to delete this client ?");
+   const fetchConsultantData = async () => {
+    let result = await HttpClient.requestData("consultant", "GET");
 
-    let result = HttpClient.requestData(`/.../${itemId}`, "DELETE")
-   
-  }
+    console.log("client result", result.data)
 
-  useEffect(() => {
-    fetchConsultantdata();
-  }, []);
+    if (result) {
+      let arr = result?.data.map((client, index) => {
+        return {
+          sl: index + 1,
+          FirstName: (
+            <div style={{ fontSize: "13px" }}>
+             {client?.firstname}
+            </div>
+          ),
+          LastName: (
+            <div style={{ fontSize: "13px" }}>{client?.lastname}</div>
+
+          ),
+          Email: (
+            <div style={{ fontSize: "13px" }}>{client?.email}</div>
+
+          ),
+          Mobile: (
+            <div style={{ fontSize: "13px" }}>{client?.mobile}</div>
+
+          ),
+          Location: (
+            <div style={{ fontSize: "13px" }}>{client?.currlocation}</div>
+
+          ),
+          Profile: (
+            <div style={{ fontSize: "13px" }}>{client?.profile}</div>
+
+          ),
+          Action: (
+            <div style={{ display: "flex", flexDirection: "coloum" }}>
+              <Link to={`/edit-client/${client._id}`}>
+              <svg
+                style={{
+                  height: "20px",
+                  width: "20px",
+                  cursor: "pointer",
+                  marginRight: "34px",
+                }}
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-square"
+                viewBox="0 0 16 16"
+              >
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                />
+              </svg>
+              </Link>
+              <svg
+                // onClick={() => onClientDelete(client._id)}
+                style={{
+                  color: "red",
+                  height: "20px",
+                  cursor: "pointer",
+                  width: "20px",
+                }}
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash3"
+                viewBox="0 0 16 16"
+              >
+                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+              </svg>
+             
+            </div>
+          ),
+          Status: (
+            <button
+            className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
+            onClick={() => handleStatusChange(client._id, client.status)}
+          >
+            {client.status ? "inActive" : "Active"}
+          </button>
+          )
+
+        };
+      });
+
+      console.log(arr)
+      setConsultantData(arr);
+    }
+  };
+
+  // status change
+  const handleStatusChange = async (clientId) => {
+    let data = {
+      categoryID: clientId,
+    };
+    console.log("selected id", data)
+
+    let resultStatus = await HttpClient.requestData(
+      `client/set-status/${clientId}`,
+      "PUT",
+      data
+    );
+
+    console.log("handlechange.....", resultStatus.data.status);
+    setConsultantData((prevData) =>
+    prevData.map((client) =>
+      client._id === clientId
+        ? { ...client, status: resultStatus.data.status }
+        : client
+    )
+  );
+
+  await fetchConsultantData();
+  };
+
+  const columns = [
+    {
+      name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>SL</div>,
+      selector: (row) => row.sl,
+    },
+
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          FirstName
+        </div>
+      ),
+      selector: (row) => row.FirstName,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          LastName
+        </div>
+      ),
+      selector: (row) => row.LastName,
+    },
+    {
+      name: (
+        <div
+          style={{ fontSize: "14px", marginLeft: "15px", fontWeight: "bolder" }}
+        >
+          Email
+        </div>
+      ),
+      selector: (row) => row.Email,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          Mobile
+        </div>
+      ),
+      selector: (row) => row.Mobile,
+    },
+    {
+        name: (
+          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+            Location
+          </div>
+        ),
+        selector: (row) => row.Location,
+      },
+      {
+        name: (
+          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+            Profile
+          </div>
+        ),
+        selector: (row) => row.Profile,
+      },
+      {
+        name: (
+          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+            Action
+          </div>
+        ),
+        selector: (row) => row.Action,
+      },
+      {
+        name: (
+          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+            Status
+          </div>
+        ),
+        selector: (row) => row.Status,
+      },
+
+  ];
+
+
+
+  
 
   return (
-    <div className="overflow-x-auto overflow-y-auto">
-      <div className="min-w-max">
-        <table className="bg-gray-200 w-auto text-black table-fixed">
-          <thead>
-            <tr className="bg-blue-300 space-x-4">
-              <th className="border border-2">First Name</th>
-              <th className="">Last Name</th>
-              <th className="">Email</th>
-              <th className="">Mobile</th>
-              <th className="">Experience</th>
-              <th className="">Gender</th>
-              <th className="">Date Of Birth</th>
-              <th className="">Profile Summary</th>
-              <th className="">Qualification</th>
-              <th className="">Skills</th>
-              <th className="">Sub Skills</th>
-              <th className="">Key Technologies</th>
-              <th className="">Key Word</th>
-              <th className="">Location</th>
-              <th className="">Relocate(y/n)</th>
-              <th className="">Resume</th>
-              <th className="">Edit</th>
-              <th className="">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {consultantData.map((item) => (
-              <tr key={item._id}>
-                <td>{item.firstname}</td>
-                <td>{item.lastname}</td>
-                <td>{item.email}</td>
-                <td>{item.mobile}</td>
-                <td>{item.experience}</td>
-                <td>{item.gender}</td>
-                <td>{item.dob}</td>
-                <td>{item.summery}</td>
-                <td>{item.qualification}</td>
-                <td>{item.keytech}</td>
-                <td>{item.subcategory_data?.name}</td>
-                <td>{item.category_data?.name}</td>
-                <td>{item.keywords}</td>
-                <td>{item.currlocation}</td>
-                <td>{item.relocate}</td>
-                <td>{item.resume}</td>
-                <Link to={`/edit-consultant/${item._id}`}>
-                <button 
-                className="h-10 w-18 rounded border border-2 bg-yellow-500 text-black">
-                  Edit
-                </button>
-                </Link>
-                <button 
-                onClick={() => handleConsultantDelete(item._id)}
-                className="h-10 w-18 rounded border border-2 bg-red-500 text-black">
-                  Delete
-                </button>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
+    <Header title="All Consultant List" />
+    <DataTable columns={columns} data={consultantData} pagination />
+  </div>
   );
 };
 

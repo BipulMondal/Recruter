@@ -567,7 +567,7 @@ const AddApplicant = () => {
             />
           </div>
         </div>
-        {/* Resume */}
+        {/* image */}
         <div className="flex justify-between">
           <div>
           <div className="flex justify-between">

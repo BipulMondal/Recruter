@@ -16,48 +16,68 @@ const ManageConsultant = () => {
   }, [status]);
 
 
-  const handleConsultantDelete = async (itemId) => {
+  const handleConsultantDelete = async (consultantId) => {
     alert("Are you really want to delete this client ?");
-     let result = HttpClient.requestData(`/.../${itemId}`, "DELETE")
+     let result = await HttpClient.requestData(`/consultant/${consultantId}`, "DELETE")
+
+     if(result && result.status){
+      toast.success("Consultant Deleted Successfully")
+      fetchConsultantData();
+     }
+     else(
+      toast.error("Consultant Deleted failed")
+     )
    }
 
    const fetchConsultantData = async () => {
     let result = await HttpClient.requestData("consultant", "GET");
 
-    console.log("client result", result.data)
+    // console.log("client result", result.data)
 
     if (result) {
-      let arr = result?.data.map((client, index) => {
+      let arr = result?.data.map((consultant, index) => {
         return {
           sl: index + 1,
           FirstName: (
             <div style={{ fontSize: "13px" }}>
-             {client?.firstname}
+             {consultant?.firstname}
             </div>
           ),
           LastName: (
-            <div style={{ fontSize: "13px" }}>{client?.lastname}</div>
+            <div style={{ fontSize: "13px" }}>{consultant?.lastname}</div>
 
           ),
           Email: (
-            <div style={{ fontSize: "13px" }}>{client?.email}</div>
+            <div style={{ fontSize: "13px", width:"15rem" }}>{consultant?.email}</div>
 
           ),
           Mobile: (
-            <div style={{ fontSize: "13px" }}>{client?.mobile}</div>
+            <div style={{ fontSize: "13px" }}>{consultant?.mobile}</div>
+
+          ),
+          Experience: (
+            <div style={{ fontSize: "13px" }}>{consultant?.experience}</div>
+
+          ),
+          Gender: (
+            <div style={{ fontSize: "13px" }}>{consultant?.gender}</div>
+
+          ),
+          DOB: (
+            <div style={{ fontSize: "13px" }}>{consultant?.dob}</div>
 
           ),
           Location: (
-            <div style={{ fontSize: "13px" }}>{client?.currlocation}</div>
+            <div style={{ fontSize: "13px" }}>{consultant?.currlocation}</div>
 
           ),
           Profile: (
-            <div style={{ fontSize: "13px" }}>{client?.profile}</div>
+            <div style={{ fontSize: "13px" }}>{consultant?.profile}</div>
 
           ),
           Action: (
             <div style={{ display: "flex", flexDirection: "coloum" }}>
-              <Link to={`/edit-client/${client._id}`}>
+              <Link to={`/edit-consultant/${consultant._id}`}>
               <svg
                 style={{
                   height: "20px",
@@ -80,7 +100,7 @@ const ManageConsultant = () => {
               </svg>
               </Link>
               <svg
-                // onClick={() => onClientDelete(client._id)}
+                onClick={() => handleConsultantDelete(consultant._id)}
                 style={{
                   color: "red",
                   height: "20px",
@@ -102,29 +122,29 @@ const ManageConsultant = () => {
           Status: (
             <button
             className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
-            onClick={() => handleStatusChange(client._id, client.status)}
+            onClick={() => handleStatusChange(consultant._id, consultant.status)}
           >
-            {client.status ? "inActive" : "Active"}
+            {consultant.status ? "inActive" : "Active"}
           </button>
           )
 
         };
       });
 
-      console.log(arr)
+      // console.log(arr)
       setConsultantData(arr);
     }
   };
 
   // status change
-  const handleStatusChange = async (clientId) => {
+  const handleStatusChange = async (consultantId) => {
     let data = {
-      categoryID: clientId,
+      categoryID: consultantId,
     };
     console.log("selected id", data)
 
     let resultStatus = await HttpClient.requestData(
-      `client/set-status/${clientId}`,
+      `consultant/set-status/${consultantId}`,
       "PUT",
       data
     );
@@ -132,7 +152,7 @@ const ManageConsultant = () => {
     console.log("handlechange.....", resultStatus.data.status);
     setConsultantData((prevData) =>
     prevData.map((client) =>
-      client._id === clientId
+      client._id === consultantId
         ? { ...client, status: resultStatus.data.status }
         : client
     )
@@ -180,6 +200,30 @@ const ManageConsultant = () => {
         </div>
       ),
       selector: (row) => row.Mobile,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          Experience
+        </div>
+      ),
+      selector: (row) => row.Experience,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          Gender
+        </div>
+      ),
+      selector: (row) => row.Gender,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          DOB
+        </div>
+      ),
+      selector: (row) => row.DOB,
     },
     {
         name: (

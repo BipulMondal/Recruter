@@ -16,59 +16,76 @@ const ManageRecruiter = () => {
     fetchRecruiterdata();
   }, [status]);
 
-  const onClientDelete = async (clientId) => {
+  const onRecruiterDelete = async (recruiterId) => {
     alert("Are you really want to delete this client ?");
     let data = {
-      categoryID: clientId
+      categoryID: recruiterId
     };
-    let endpoint = `client/${clientId}`;
+    let endpoint = `recruiter/${recruiterId}`;
     let result = await HttpClient.requestData(endpoint, "DELETE", data);
     console.log("Delete", result);
+
     if (result && result.status) {
       toast.success(result.message);
       fetchRecruiterdata();
     } else {
-      toast.error("Failed to delete subCategary data");
+      toast.error("Failed to delete recruiter data");
     }
   };
 
   const fetchRecruiterdata = async () => {
-    let result = await HttpClient.requestData("client", "GET");
+    let result = await HttpClient.requestData("recruiter", "GET");
 
-    console.log("client result", result.data)
+    console.log("Recruiter result", result.data)
 
     if (result) {
-      let arr = result?.data.map((client, index) => {
+      let arr = result?.data.map((recruiter, index) => {
         return {
           sl: index + 1,
           FirstName: (
             <div style={{ fontSize: "13px" }}>
-             {client?.firstname}
+             {recruiter?.firstname}
             </div>
           ),
           LastName: (
-            <div style={{ fontSize: "13px" }}>{client?.lastname}</div>
+            <div style={{ fontSize: "13px" }}>{recruiter?.lastname}</div>
 
           ),
           Email: (
-            <div style={{ fontSize: "13px" }}>{client?.email}</div>
+            <div style={{ fontSize: "13px" }}>{recruiter?.email}</div>
 
           ),
           Mobile: (
-            <div style={{ fontSize: "13px" }}>{client?.mobile}</div>
+            <div style={{ fontSize: "13px" }}>{recruiter?.mobile}</div>
 
           ),
-          Location: (
-            <div style={{ fontSize: "13px" }}>{client?.currlocation}</div>
+          Experience: (
+            <div style={{ fontSize: "13px" }}>{recruiter?.experience}</div>
+
+          ),
+          Gender: (
+            <div style={{ fontSize: "13px" }}>{recruiter?.gender}</div>
+
+          ),
+          DOB: (
+            <div style={{ fontSize: "13px" }}>{recruiter?.dob}</div>
+
+          ),
+          Summery: (
+            <div style={{ fontSize: "13px" }}>{recruiter?.summery}</div>
+
+          ),
+          Qualification: (
+            <div style={{ fontSize: "13px" }}>{recruiter?.qualification}</div>
 
           ),
           Profile: (
-            <div style={{ fontSize: "13px" }}>{client?.profile}</div>
+            <div style={{ fontSize: "13px" }}>{recruiter?.profile}</div>
 
           ),
           Action: (
             <div style={{ display: "flex", flexDirection: "coloum" }}>
-              <Link to={`/edit-client/${client._id}`}>
+              <Link to={`/edit-recruiter/${recruiter._id}`}>
               <svg
                 style={{
                   height: "20px",
@@ -91,7 +108,7 @@ const ManageRecruiter = () => {
               </svg>
               </Link>
               <svg
-                onClick={() => onClientDelete(client._id)}
+                onClick={() => onRecruiterDelete(recruiter._id)}
                 style={{
                   color: "red",
                   height: "20px",
@@ -113,9 +130,9 @@ const ManageRecruiter = () => {
           Status: (
             <button
             className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
-            onClick={() => handleStatusChange(client._id, client.status)}
+            onClick={() => handleStatusChange(recruiter._id, recruiter.status)}
           >
-            {client.status ? "inActive" : "Active"}
+            {recruiter.status ? "inActive" : "Active"}
           </button>
           )
 
@@ -128,24 +145,24 @@ const ManageRecruiter = () => {
   };
 
   // status change
-  const handleStatusChange = async (clientId) => {
+  const handleStatusChange = async (recruiterId) => {
     let data = {
-      categoryID: clientId,
+      categoryID: recruiterId,
     };
     console.log("selected id", data)
 
     let resultStatus = await HttpClient.requestData(
-      `client/set-status/${clientId}`,
+      `recruiter/set-status/${recruiterId}`,
       "PUT",
       data
     );
 
     console.log("handlechange.....", resultStatus.data.status);
     setRecruiterData((prevData) =>
-    prevData.map((client) =>
-      client._id === clientId
-        ? { ...client, status: resultStatus.data.status }
-        : client
+    prevData.map((recruiter) =>
+    recruiter._id === recruiterId
+        ? { ...recruiter, status: resultStatus.data.status }
+        : recruiter
     )
   );
 
@@ -194,13 +211,29 @@ const ManageRecruiter = () => {
       selector: (row) => row.Mobile,
     },
     {
-        name: (
-          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            Location
-          </div>
-        ),
-        selector: (row) => row.Location,
-      },
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          Experience
+        </div>
+      ),
+      selector: (row) => row.Experience,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          Gender
+        </div>
+      ),
+      selector: (row) => row.Gender,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+          DOB
+        </div>
+      ),
+      selector: (row) => row.DOB,
+    },
       {
         name: (
           <div style={{ fontSize: "14px", fontWeight: "bolder" }}>

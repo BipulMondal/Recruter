@@ -15,7 +15,7 @@ const EditConsultant = () => {
     experience: "",
     category: [],
     sub_category: [],
-    keyword: "",
+    keywords: "",
     keytech: "",
     currlocation: "",
     summery: "",
@@ -30,7 +30,7 @@ const EditConsultant = () => {
   const navigate = useNavigate();
 
   const params = useParams();
-//   console.log("paramsId", params.id)
+  //   console.log("paramsId", params.id)
 
   //fetch category data
   const fetchCategoryData = async () => {
@@ -53,14 +53,12 @@ const EditConsultant = () => {
     // console.log("ConsultantData", result.data);
 
     if (result && result.status) {
+      const filterData = result.data.filter((item) => item._id === params.id);
+      console.log("filterData", filterData[0]);
 
-        const filterData = result.data.filter(item => item._id === params.id)
-        console.log("filterData", filterData[0])
-
-        if(filterData){
-            setApplicantData(filterData[0])
-        }
-
+      if (filterData) {
+        setApplicantData(filterData[0]);
+      }
     } else {
       toast.error("Error to fetch Consultant Data");
     }
@@ -75,7 +73,7 @@ const EditConsultant = () => {
     setHide(category === null);
     setSelectCategory(category);
     fetchSubCategoryData(categoryId);
-    console.log("categoryId", categoryId)
+    console.log("categoryId", categoryId);
   };
 
   // handle subcategory id
@@ -95,7 +93,7 @@ const EditConsultant = () => {
       "GET"
     );
 
-    console.log("categoryId for fetch subcategory", categoryId)
+    console.log("categoryId for fetch subcategory", categoryId);
 
     if (result && result.status) {
       try {
@@ -105,13 +103,12 @@ const EditConsultant = () => {
         }));
         console.log("tefchsubcategory.....", result);
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       }
-      
     }
   };
 
-  // date of birth 
+  // date of birth
   const handleDobChange = (e) => {
     e.preventDefault();
 
@@ -121,8 +118,8 @@ const EditConsultant = () => {
     setApplicantData({
       ...applicantData,
       dob: e.target.value,
-    })
-  }
+    });
+  };
 
   // submit Updated ApplicantData
   const handleUpdate = async (e) => {
@@ -138,7 +135,7 @@ const EditConsultant = () => {
       qualification: applicantData.qualification,
       currlocation: applicantData.currlocation,
       keytech: applicantData.keytech,
-      keywords: applicantData.keyword,
+      keywords: applicantData.keywords,
       dob: applicantData.dob,
       relocate: applicantData.relocate,
       profile: applicantData.resume,
@@ -148,37 +145,38 @@ const EditConsultant = () => {
     };
 
     console.log(data);
-    let result = await HttpClient.requestData(`consultant/${params.id}`, "PUT", data);
+    let result = await HttpClient.requestData(
+      `consultant/${params.id}`,
+      "PUT",
+      data
+    );
 
-    if(result && result.status){
-      toast.success("Applicat updated Successfully")
-      console.log("Applicat updated Successfully")
-      navigate("/manage-consultant")
+    if (result && result.status) {
+      toast.success("Consultant updated Successfully");
+      console.log("Consultant updated Successfully");
+      navigate("/manage-consultant");
+    } else {
+      toast.error("Consultant updated failed");
+      console.log("Consultant updated failes");
     }
-    else{
-      toast.error("Applicat updated failed")
-      console.log("Applicat updated failes")
-    }
-
   };
 
   // upload resume
-  const handleResumeUpload = async (e) => {
+  const handleImageUpload = async (e) => {
     e.preventDefault();
     let data = new FormData();
     data.append("image", applicantData.resume);
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
       console.log("upload resume data", result);
-      if(result && result.status) {
-          applicantData.resume = result.data;
-          toast.success("Resume Upload Successfully")
-      }
-      else{
-        toast.error("Resume Can not be uploaded")
+      if (result && result.status) {
+        applicantData.resume = result.data;
+        toast.success("Image Upload Successfully");
+      } else {
+        toast.error("Image Can not be uploaded");
       }
     } catch (error) {
-      console.log("Error uploading resume", error.message);
+      console.log("Error uploading Image", error.message);
     }
   };
 
@@ -263,7 +261,10 @@ const EditConsultant = () => {
                 value="Male"
                 checked={applicantData.gender === "Male"}
                 onChange={(e) =>
-                  setApplicantData({ ...applicantData, gender: e.target.value ? "Male" : "" })
+                  setApplicantData({
+                    ...applicantData,
+                    gender: e.target.value ? "Male" : "",
+                  })
                 }
               />
               Male
@@ -275,7 +276,7 @@ const EditConsultant = () => {
                 onChange={(e) =>
                   setApplicantData({
                     ...applicantData,
-                    gender: e.target.value? "Female" : ""
+                    gender: e.target.value ? "Female" : "",
                   })
                 }
               />
@@ -340,7 +341,12 @@ const EditConsultant = () => {
               value={selectCategory ? selectCategory._id : ""}
               onChange={(e) => handleCategoryId(e)}
             >
-              <option value={""}>Select a Skills</option>
+              <option value={""}>Select Skills</option>
+              {/* <option value="">
+                {applicantData.category.length > 0
+                  ? applicantData.category[0].name
+                  : "Select Skills"}
+              </option> */}
 
               {Array.isArray(applicantData.category) &&
                 applicantData.category.map((item, index) => (
@@ -361,6 +367,12 @@ const EditConsultant = () => {
               onChange={(e) => handleSubCategoryId(e)}
             >
               <option value={""}>Select Sub Skills</option>
+              {/* <option value="">
+                {applicantData.subcategory_data.length > 0
+                  ? applicantData.subcategory_data[0].name
+                  : "Select Sub Skills"}
+              </option> */}
+
               {Array.isArray(applicantData.sub_category) &&
                 applicantData.sub_category.map((item, index) => (
                   <option key={item._id} value={item._id}>
@@ -394,11 +406,11 @@ const EditConsultant = () => {
             <br />
             <input
               type="text"
-              value={applicantData.keyword}
+              value={applicantData.keywords}
               onChange={(e) =>
                 setApplicantData({
                   ...applicantData,
-                  keyword: e.target.value,
+                  keywords: e.target.value,
                 })
               }
               placeholder="Key Word"
@@ -418,7 +430,10 @@ const EditConsultant = () => {
               placeholder="Current Location"
               className="bg-white w-[25rem] text-black"
               onChange={(e) =>
-                setApplicantData({ ...applicantData, currlocation: e.target.value })
+                setApplicantData({
+                  ...applicantData,
+                  currlocation: e.target.value,
+                })
               }
             />
           </div>
@@ -511,9 +526,9 @@ const EditConsultant = () => {
             />
             <button
               className="bg-white text-black border border-2 rounded h-12"
-              onClick={handleResumeUpload}
+              onClick={handleImageUpload}
             >
-              Upload Resume
+              Upload Image
             </button>
           </div>
         </div>

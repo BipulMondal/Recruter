@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import HttpClient from "../../components/HttpClient";
+import { GiFlowerStar } from "react-icons/gi";
 
 const AddApplicant = () => {
   const [clientData, setClientData] = useState({
@@ -12,71 +13,72 @@ const AddApplicant = () => {
     profile: "",
   });
 
-  const [hide, setHide] = useState(false);
-
-  //fetch category data
-  const fetchCategoryData = async () => {
-    let result = await HttpClient.requestData("category", "GET");
-    console.log("ApplicantCategoryData", result.data);
-    if (result && result.status) {
-      setClientData((prevData) => ({
-        ...prevData,
-        category: result.data,
-      }));
-    } else {
-      toast.error("Error to fetch Category Data");
-    }
-  };
 
   // submit clientData
   const handleClientSubmit = async (e) => {
     e.preventDefault();
-    let data = {
-      firstname: clientData.firstname,
-      lastname: clientData.lastname,
-      email: clientData.email,
-      mobile: clientData.phone,
-      currlocation: clientData.currlocation,
-      profile: clientData.resume,
-    };
 
-    console.log(data);
-    let result = await HttpClient.requestData("client", "POST", data);
-
-    if (result && result.status) {
-      toast.success("Client Added Successfully");
-      console.log("Client Added Successfully");
-
-      setClientData({
-        firstname: "",
-        lastname: "",
-        email: "",
-        phone: "",
-        currlocation: "",
-        profile: "",
-      });
-    } else {
-      toast.error("Client Added Failed");
-      console.log("Client Added Failed");
+    if(
+      !clientData.firstname ||
+      !clientData.lastname ||
+      !clientData.email ||
+      !clientData.phone ||
+      !clientData.currlocation 
+    ){
+      alert(" * fileds are required")
     }
+    else{
+      let data = {
+        firstname: clientData.firstname,
+        lastname: clientData.lastname,
+        email: clientData.email,
+        mobile: clientData.phone,
+        currlocation: clientData.currlocation,
+        profile: clientData.resume,
+      };
+  
+      console.log(data);
+      let result = await HttpClient.requestData("client", "POST", data);
+  
+      if (result && result.status) {
+        toast.success("Client Added Successfully");
+        console.log("Client Added Successfully");
+  
+        setClientData({
+          firstname: "",
+          lastname: "",
+          email: "",
+          phone: "",
+          currlocation: "",
+          profile: null,
+        });
+      } else {
+        toast.error("Client Added Failed");
+        console.log("Client Added Failed");
+      }
+    }
+    
   };
 
   // upload resume
-  const handleResumeUpload = async (e) => {
+  const handleImageUpload = async (e) => {
     e.preventDefault();
+
     let data = new FormData();
     data.append("image", clientData.resume);
+
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
-      console.log("upload resume data", result);
+      console.log("upload image data", result);
+
       if (result && result.status) {
         clientData.resume = result.data;
-        toast.success("Resume Upload Successfully");
+        toast.success("image Upload Successfully");
       } else {
-        toast.error("Resume Can not be uploaded");
+        toast.error("Image Can not be uploaded");
       }
     } catch (error) {
-      console.log("Error uploading resume", error.message);
+      console.log("Error uploading image", error.message);
     }
   };
 
@@ -87,8 +89,12 @@ const AddApplicant = () => {
         {/* first name */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter First Name</label>
-            <br />
+          <div className=" flex justify-between">
+          <label htmlFor="">Enter First Name</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+          </div>
             <input
               type="text"
               value={clientData.firstname}
@@ -106,8 +112,12 @@ const AddApplicant = () => {
         {/* last name */}
         <div className="flex justify-between">
           <div className="">
-            <label htmlFor="">Enter Last Name</label>
-            <br />
+          <div className=" flex justify-between">
+          <label htmlFor="">Enter Last Name</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+          </div>
             <input
               type="text"
               value={clientData.lastname}
@@ -122,8 +132,12 @@ const AddApplicant = () => {
         {/* gmail */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Email</label>
-            <br />
+          <div className=" flex justify-between">
+          <label htmlFor="">Enter Email</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+          </div>
             <input
               type="email"
               value={clientData.email}
@@ -138,8 +152,12 @@ const AddApplicant = () => {
         {/* mobile */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Phone </label>
-            <br />
+          <div className=" flex justify-between">
+          <label htmlFor="">Enter Mobile</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+          </div>
             <input
               type="Phone"
               value={clientData.phone}
@@ -155,8 +173,12 @@ const AddApplicant = () => {
         {/* location*/}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Enter Current Location</label>
-            <br />
+          <div className=" flex justify-between">
+          <label htmlFor="">Enter Location</label>
+              <span>
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+              </span>
+          </div>
             <input
               type="text"
               value={clientData.currlocation}
@@ -168,10 +190,10 @@ const AddApplicant = () => {
             />
           </div>
         </div>
-        {/* Resume */}
+        {/* image upload */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Browse Resume</label>
+            <label htmlFor="">Browse Image</label>
             <br />
             <input
               type="file"
@@ -186,9 +208,9 @@ const AddApplicant = () => {
             />
             <button
               className="bg-white text-black border border-2 rounded h-12"
-              onClick={handleResumeUpload}
+              onClick={handleImageUpload}
             >
-              Upload Resume
+              Upload Image
             </button>
           </div>
         </div>

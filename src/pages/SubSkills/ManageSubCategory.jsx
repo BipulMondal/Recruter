@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 const ManageSubCategory = () => {
   const [subCategoryData, setSubCategoryData] = useState("");
-  const [status, setStatus] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchSubCategoryData();
-  }, [status]);
+  });
 
   const onEdit = (item) => {
     console.log("Edit", item);
@@ -28,9 +27,9 @@ const ManageSubCategory = () => {
       categoryID: itemId
     };
 
-    console.log("subskills_id", data);
+    console.log("subskills_id", itemId);
 
-    let endpoint = `deleteSubCategory/${itemId}`;
+    let endpoint = `subcategory/${itemId}`;
     let result = await HttpClient.requestData(endpoint, "DELETE", data);
     console.log("Delete", result);
     
@@ -188,7 +187,7 @@ const ManageSubCategory = () => {
 
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
-      <Header title="View All Skills Sub Category List" />
+      <Header title="All Sub Skills List" />
       <DataTable columns={columns} data={subCategoryData} pagination />
     </div>
   );

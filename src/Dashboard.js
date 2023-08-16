@@ -19,11 +19,15 @@ import { useStateContext } from "./contexts/ContextProvider";
 import AddApplicant from "./pages/ConsultantManagement/AddConsultant";
 import ManageConsultant from "./pages/ConsultantManagement/ManageConsultant";
 import AddRecruiter from "./pages/RecruiterManagement/AddRecruiter";
+import EditRecruiter from "./pages/RecruiterManagement/EditRecruiter"
 import ManageRecruiter from "./pages/RecruiterManagement/ManageRecruiter";
 import EditConsultant from "./pages/ConsultantManagement/EditConsultant"
 import AddClient from "./pages/ClientManagement/AddClient";
 import EditClient from "./pages/ClientManagement/EditClient"
 import ManageClient from "./pages/ClientManagement/ManageClient";
+import Addjobs from "./pages/JobPosting/Addjobs";
+import Editjobs from "./pages/JobPosting/Editjobs";
+import Managejobs from "./pages/JobPosting/Managejobs"
 
 const Dashboard = () => {
   const {
@@ -113,11 +117,16 @@ const Dashboard = () => {
             <Route path="/manage-consultant" element={<ManageConsultant />} />
 
             <Route path="/add-recruiter" element={<AddRecruiter />} />
+            <Route path="/edit-recruiter/:id" element={<EditRecruiter />} />
             <Route path="/manage-recruiter" element={<ManageRecruiter />} />
 
             <Route path="/add-client" element={<AddClient />} />
             <Route path="/edit-client/:id" element={<EditClient />} />
             <Route path="/manage-client" element={<ManageClient />} />
+
+            <Route path="/add-jobs" element={<Addjobs />} />
+            <Route path="/edit-jobs/:id" element={<Editjobs />} />
+            <Route path="/manage-jobs" element={<Managejobs />} />
             
           </Routes>
         </div>

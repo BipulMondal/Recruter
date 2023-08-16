@@ -162,7 +162,11 @@ const Sidebar = () => {
               </button>
             </TooltipComponent>
           </div>
+
+          
           <div className="mt-10">
+
+            {/* skills  */}
             <div>
               <div
                 onClick={() => setToggle(!toggle)}
@@ -218,6 +222,7 @@ const Sidebar = () => {
               ) : null}
             </div>
 
+            {/* subskills  */}
             <div>
               <div
                 onClick={() => setToggle1(!toggle1)}
@@ -273,6 +278,7 @@ const Sidebar = () => {
               ) : null}
             </div>
 
+           {/* consultant  */}
             <div>
               <div
                 onClick={() => setToggle2(!toggle2)}
@@ -328,7 +334,7 @@ const Sidebar = () => {
               ) : null}
             </div>
 
-                {/* recruiter management */}
+            {/* recruiter  */}
             <div>
               <div
                 onClick={() => setToggle4(!toggle4)}
@@ -384,7 +390,7 @@ const Sidebar = () => {
               ) : null}
             </div>
 
-                {/* Client Management */}
+            {/* Client  */}
             <div>
               <div
                 onClick={() => setToggle5(!toggle5)}
@@ -440,13 +446,14 @@ const Sidebar = () => {
               ) : null}
             </div>
 
-            {/* <div>
+            {/* job posting */}
+            <div>
               <div
                 onClick={() => setToggle8(!toggle8)}
                 className={`siteBarDiv ${toggle8 ? "handleSidebar" : ""}`}
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                <div name="heading">Unit </div>
+                <div name="heading">Job Posting </div>
                 {toggle8 ? (
                   <span style={{ marginTop: "5px" }}>
                     <svg
@@ -485,15 +492,15 @@ const Sidebar = () => {
               </div>
               {toggle8 ? (
                 <div style={{ marginTop: "5px" }} className="swing-in-top-fwd">
-                  <Link to={"/add-unit"} className="linkAn">
-                    Add Unit
+                  <Link to={"/add-jobs"} className="linkAn">
+                    Add Jobs
                   </Link>
-                  <Link to={"/manage-unit"} className="linkAn">
-                    Manage Unit
+                  <Link to={"/manage-jobs"} className="linkAn">
+                    Manage Jobs
                   </Link>
                 </div>
               ) : null}
-            </div> */}
+            </div>
 
             {/* <div>
               <div

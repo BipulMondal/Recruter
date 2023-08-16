@@ -12,9 +12,9 @@ const Ecommerce = () => {
   const { currentColor } = useStateContext();
 
   return (
-    <div className="mt-12 ">
+    <div className="m-4 bg-teal-100 ">
       <div className="flex flex-wrap lg:flex-nowrap justify-center">
-        <div className="bg-white dark:text-gray-200  dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-left">
+        {/* <div className="bg-white dark:text-gray-200  dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-left">
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-gray-400">Earnings</p>
@@ -30,7 +30,7 @@ const Ecommerce = () => {
               size="md"
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
           {earningData.map((item) => (
@@ -48,29 +48,29 @@ const Ecommerce = () => {
               <p className="mt-3">
                 <span className="text-lg font-semibold">{item.amount}</span>
                 <span className={`text-sm text-${item.pcColor} ml-2`}>
-                  {item.percentage}
+                  {/* {item.percentage} */}
                 </span>
               </p>
-              <p className="text-sm text-gray-400  mt-1">{item.title}</p>
+              <p className="text-sm text-black  mt-1">Client</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="flex gap-10 flex-wrap justify-center">
+      {/* <div className="flex gap-10 flex-wrap justify-center">
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-760">
           <div className="flex justify-between">
             <p className="font-semibold text-xl">Revenue Updates</p>
             <div className="flex items-center gap-4">
               <p className="flex items-center gap-2 text-gray-600 hover:drop-shadow-xl">
                 <span>
-                  {/* <GoPrimitiveDot /> */}
+                  
                 </span>
                 <span>Expense</span>
               </p>
               <p className="flex items-center gap-2 text-green-400 hover:drop-shadow-xl">
                 <span>
-                  {/* <GoPrimitiveDot /> */}
+                  
                 </span>
                 <span>Budget</span>
               </p>
@@ -95,15 +95,7 @@ const Ecommerce = () => {
               </div>
 
               <div className="mt-5">
-                {/* <SparkLine
-                  currentColor={currentColor}
-                  id="line-sparkline"
-                  type="Line"
-                  height="80px"
-                  width="250px"
-                  data={SparklineAreaData}
-                  color={currentColor}
-                /> */}
+               
               </div>
               <div className="mt-10">
                 <Button
@@ -116,11 +108,11 @@ const Ecommerce = () => {
             </div>
 
             <div>
-              {/* <Stacked width="320px" height="360px" /> */}
+              
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

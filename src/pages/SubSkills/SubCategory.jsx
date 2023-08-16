@@ -89,15 +89,15 @@ const SubCategory = () => {
   };
 
   return (
-    <>
-      <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
-        <Header title="Add Skills Sub Category" />
+    <div className="w-full flex justify-center">
+       <div className="m-2 md:m-10 p-2 md:p-10 bg-gray-100 rounded-3xl w-[40rem] flex flex-col items-center border-2 border-black">
+        <Header title="Add Sub Skills" />
         
-        <label style={{ marginBottom: "12px", fontSize: "15px" }} for="cars">
-          Choose a Skills:
+        <label style={{ marginBottom: "12px", fontSize: "18px", fontWeight: "bold" }} for="cars">
+          Choose a Sub Skills:
         </label>
         <select
-          class="form-select"
+          class="w-[20rem] h-[3rem] rounded border-2 border-solid border-black"
           aria-label="select category"
           value={categoryId}
           onChange={(e) => handleCategoryId(e)}
@@ -111,11 +111,11 @@ const SubCategory = () => {
             );
           })}
         </select>
-        <form>
-          <div class="form-group">
+        <form className="flex justify-center">
+          <div class="flex flex-col">
             <label
               for="exampleInputEmail1"
-              style={{ marginBottom: "12px", fontSize: "15px" }}
+              style={{ marginBottom: "12px", marginLeft: "3.5rem", fontSize: "18px", fontWeight: "bold" }}
             >
               Sub Skills Name :
             </label>
@@ -124,9 +124,9 @@ const SubCategory = () => {
               value={subCategoryName}
               disabled={hide}
               onChange={(e) => setSubCategoryName(e.target.value)}
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              class="w-[20rem] h-[3rem] rounded border-2 border-solid border-black bg-white text-black"
+              // id="exampleInputEmail1"
+              // aria-describedby="emailHelp"
               placeholder="Enter Category Name"
             />
           </div>
@@ -136,7 +136,7 @@ const SubCategory = () => {
   {image && <img style={{ height: "30%", width: "30%" , marginTop:'12px' , borderRadius:'9px' }} src={image} />}
 </div> */}
           <button
-            class="btn btn-primary mt-4"
+            class="w-[11rem] rounded mt-4 ml-16"
             style={{ backgroundColor: "rgb(3, 201, 215)" }}
             onClick={addsubCategory}
           >
@@ -144,7 +144,7 @@ const SubCategory = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

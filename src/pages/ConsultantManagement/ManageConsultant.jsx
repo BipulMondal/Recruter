@@ -38,15 +38,15 @@ const ManageConsultant = () => {
       let arr = result?.data.map((consultant, index) => {
         return {
           sl: index + 1,
-          FirstName: (
+          Name: (
             <div style={{ fontSize: "13px" }}>
-             {consultant?.firstname}
+             {consultant?.firstname + consultant?.lastname}
             </div>
           ),
-          LastName: (
-            <div style={{ fontSize: "13px" }}>{consultant?.lastname}</div>
+          // LastName: (
+          //   <div style={{ fontSize: "13px" }}>{consultant?.lastname}</div>
 
-          ),
+          // ),
           Email: (
             <div style={{ fontSize: "13px", width:"15rem" }}>{consultant?.email}</div>
 
@@ -72,7 +72,8 @@ const ManageConsultant = () => {
 
           ),
           Profile: (
-            <div style={{ fontSize: "13px" }}>{consultant?.profile}</div>
+            // <div style={{ fontSize: "13px" }}>{consultant?.profile}</div>
+            <img src={consultant?.profile} alt="logo" />
 
           ),
           Action: (
@@ -163,26 +164,26 @@ const ManageConsultant = () => {
 
   const columns = [
     {
-      name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>SL</div>,
+      name: <div style={{ fontSize: "14px", fontWeight: "bolder"}}>SL</div>,
       selector: (row) => row.sl,
     },
 
     {
       name: (
         <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          FirstName
+          Name
         </div>
       ),
-      selector: (row) => row.FirstName,
+      selector: (row) => row.Name,
     },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          LastName
-        </div>
-      ),
-      selector: (row) => row.LastName,
-    },
+    // {
+    //   name: (
+    //     <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+    //       LastName
+    //     </div>
+    //   ),
+    //   selector: (row) => row.LastName,
+    // },
     {
       name: (
         <div
@@ -209,30 +210,6 @@ const ManageConsultant = () => {
       ),
       selector: (row) => row.Experience,
     },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          Gender
-        </div>
-      ),
-      selector: (row) => row.Gender,
-    },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          DOB
-        </div>
-      ),
-      selector: (row) => row.DOB,
-    },
-    {
-        name: (
-          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            Location
-          </div>
-        ),
-        selector: (row) => row.Location,
-      },
       {
         name: (
           <div style={{ fontSize: "14px", fontWeight: "bolder" }}>

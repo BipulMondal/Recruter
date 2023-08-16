@@ -60,13 +60,15 @@ const EditRecruiter = () => {
    // upload resume
    const handleImageUpload = async (e) => {
     e.preventDefault();
+
     let data = new FormData();
-    data.append("image", recruiterData.resume);
+    data.append("image", recruiterData.profile);
+
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
       console.log("upload resume data", result);
       if (result && result.status) {
-        recruiterData.resume = result.data;
+        recruiterData.profile = result.data;
         toast.success("Image Upload Successfully");
       } else {
         toast.error("Image Can not be uploaded");
@@ -85,7 +87,7 @@ const EditRecruiter = () => {
       email: recruiterData.email,
       mobile: recruiterData.mobile,
       password: recruiterData.password,
-      profile: recruiterData.summery,
+      profile: recruiterData.profile,
       gender: recruiterData.gender,
       dob: recruiterData.dob,
       qualification: recruiterData.qualification,
@@ -94,6 +96,7 @@ const EditRecruiter = () => {
     };
 
     console.log(data);
+
     let result = await HttpClient.requestData(
       `recruiter/${params.id}`,
       "PUT",
@@ -178,7 +181,7 @@ const EditRecruiter = () => {
     
             {/* password and summery */}
             <div className="flex justify-between">
-              <div>
+              {/* <div>
                 <label htmlFor="">Enter Password</label>
                 <br />
                 <input
@@ -190,7 +193,7 @@ const EditRecruiter = () => {
                   placeholder="Email"
                   className="bg-white w-[25rem] text-black"
                 />
-              </div>
+              </div> */}
               <div>
                 <label htmlFor="">Profile Summary </label>
                 <br />
@@ -204,10 +207,7 @@ const EditRecruiter = () => {
                   className="bg-white w-[25rem] text-black"
                 />
               </div>
-            </div>
-    
-            {/* gender and D.O.B */}
-            <div className="flex justify-between">
+
               <div>
                 <label htmlFor="">Select Gender</label>
                 <br />
@@ -218,8 +218,9 @@ const EditRecruiter = () => {
                     value="Male"
                     checked={recruiterData.gender === "Male"}
                     onChange={(e) =>
-                      setRecruiterData({ ...recruiterData,
-                         gender: e.target.value ? "Male" : "" })
+                      setRecruiterData({ 
+                        ...recruiterData,
+                        gender: e.target.value ? "Male" : "" })
                     }
                   />
                   Male
@@ -238,20 +239,11 @@ const EditRecruiter = () => {
                   Female
                 </div>
               </div>
-              <div>
-                <label htmlFor="">Enter D.O.B</label>
-                <br />
-                <input
-                  type="date"
-                  className="w-[25rem] bg-white text-black"
-                  value={recruiterData.dob}
-                  onChange={(e) => handleDobChange(e)}
-                />
-              </div>
             </div>
-            {/* qualification and experience */}
+    
+            {/* D.O.B */}
             <div className="flex justify-between">
-              <div>
+            <div>
                 <label htmlFor="">Enter Last Qualification</label>
                 <br />
                 <input
@@ -267,6 +259,20 @@ const EditRecruiter = () => {
                   className="bg-white w-[25rem] text-black"
                 />
               </div>
+              <div>
+                <label htmlFor="">Enter D.O.B</label>
+                <br />
+                <input
+                  type="date"
+                  className="w-[25rem] bg-white text-black"
+                  value={recruiterData.dob}
+                  onChange={(e) => handleDobChange(e)}
+                />
+              </div>
+            </div>
+            {/* qualification and experience */}
+            <div className="flex justify-between">
+             
               <div>
                 <label htmlFor="">Enter Experience </label>
                 <br />
@@ -286,7 +292,7 @@ const EditRecruiter = () => {
             </div>
     
     
-            {/* Resume */}
+            {/* image */}
             <div className="flex justify-between">
               <div>
                 <label htmlFor="">Browse Image</label>
@@ -298,7 +304,7 @@ const EditRecruiter = () => {
                   onChange={(e) =>
                     setRecruiterData({
                       ...recruiterData,
-                      resume: e.target.files[0],
+                      profile: e.target.files[0],
                     })
                   }
                 />

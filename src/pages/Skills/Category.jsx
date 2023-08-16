@@ -79,31 +79,34 @@ const Category = () => {
   return (
     <>
       {viewLoader ? <Loader /> : null}
-      <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
+      <div className="flex justify-center mt-20 ">
+      <div className="m-2 md:m-10 p-2 md:p-10 bg-gray-100 border-2 border-black rounded-3xl w-[40rem] flex flex-col justify-center items-center">
         <Header title="Add Skills" />
-        <form>
-          <div class="form-group">
+        <form className="flex flex-col items-center ">
+          <div class="">
             <label for="exampleInputEmail1" style={{ marginBottom: "12px" }}>
               Skills
-            </label>
+            </label><br />
             <input
               type="email"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              class="form-control"
+              className="bg-white text-black border-2 border-solid border-black"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter Skills"
+
             />
           </div>
           <button
-            class="btn btn-primary mt-4"
+            class="w-[8rem] rounded mt-4"
             style={{ backgroundColor: "rgb(3, 201, 215)" }}
             onClick={(e) => addCategory(e)}
           >
             Add Skills
           </button>
         </form>
+      </div>
       </div>
     </>
   );

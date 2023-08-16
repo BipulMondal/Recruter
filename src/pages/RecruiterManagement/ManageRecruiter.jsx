@@ -42,15 +42,15 @@ const ManageRecruiter = () => {
       let arr = result?.data.map((recruiter, index) => {
         return {
           sl: index + 1,
-          FirstName: (
+          Name: (
             <div style={{ fontSize: "13px" }}>
-             {recruiter?.firstname}
+             {recruiter?.firstname + recruiter?.lastname}
             </div>
           ),
-          LastName: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.lastname}</div>
+          // LastName: (
+          //   <div style={{ fontSize: "13px" }}>{recruiter?.lastname}</div>
 
-          ),
+          // ),
           Email: (
             <div style={{ fontSize: "13px" }}>{recruiter?.email}</div>
 
@@ -63,14 +63,14 @@ const ManageRecruiter = () => {
             <div style={{ fontSize: "13px" }}>{recruiter?.experience}</div>
 
           ),
-          Gender: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.gender}</div>
+          // Gender: (
+          //   <div style={{ fontSize: "13px" }}>{recruiter?.gender}</div>
 
-          ),
-          DOB: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.dob}</div>
+          // ),
+          // DOB: (
+          //   <div style={{ fontSize: "13px" }}>{recruiter?.dob}</div>
 
-          ),
+          // ),
           Summery: (
             <div style={{ fontSize: "13px" }}>{recruiter?.summery}</div>
 
@@ -80,7 +80,9 @@ const ManageRecruiter = () => {
 
           ),
           Profile: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.profile}</div>
+            // <div style={{ fontSize: "13px" }}>{recruiter?.profile}</div>
+              <img src={recruiter?.profile} alt="Uploaded Profile" className="h-10 w-10 rounded-full"/>
+  
 
           ),
           Action: (
@@ -171,27 +173,27 @@ const ManageRecruiter = () => {
 
 
   const columns = [
-    {
-      name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>SL</div>,
-      selector: (row) => row.sl,
-    },
+    // {
+    //   name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>SL</div>,
+    //   selector: (row) => row.sl,
+    // },
 
     {
       name: (
         <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          FirstName
+          Name
         </div>
       ),
-      selector: (row) => row.FirstName,
+      selector: (row) => row.Name,
     },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          LastName
-        </div>
-      ),
-      selector: (row) => row.LastName,
-    },
+    // {
+    //   name: (
+    //     <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+    //       LastName
+    //     </div>
+    //   ),
+    //   selector: (row) => row.LastName,
+    // },
     {
       name: (
         <div
@@ -218,22 +220,22 @@ const ManageRecruiter = () => {
       ),
       selector: (row) => row.Experience,
     },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          Gender
-        </div>
-      ),
-      selector: (row) => row.Gender,
-    },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          DOB
-        </div>
-      ),
-      selector: (row) => row.DOB,
-    },
+    // {
+    //   name: (
+    //     <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+    //       Gender
+    //     </div>
+    //   ),
+    //   selector: (row) => row.Gender,
+    // },
+    // {
+    //   name: (
+    //     <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+    //       DOB
+    //     </div>
+    //   ),
+    //   selector: (row) => row.DOB,
+    // },
       {
         name: (
           <div style={{ fontSize: "14px", fontWeight: "bolder" }}>

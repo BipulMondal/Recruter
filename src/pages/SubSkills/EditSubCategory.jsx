@@ -116,98 +116,31 @@ const EditSubCategory = () => {
 
   return (
     <>
-      <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
-        <Header title="Edit Skills Sub Category" />
-        {/* <Wrapper>
-            <label for="cars">Choose a category:</label>
-  <select style={{height: '58px' , borderRadius:'5px'}} id="category" name="category" value={categoryId} onChange={(e)=> setCategoryId(e.target.value)}>
-    <option value={''}>Select a Category.......</option>
-    {categoryData.map((item , index) => {
-      return(
-        <option id={item?._id}  value={item?._id}>{item?.catName}</option>
-      )
-    })}
-    
-  </select>
-            <TextField type="text"  label="SubCategory Name" value={subCategoryName} variant="filled" onChange={(e) => setSubCategoryName(e.target.value)} />
+      <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl flex flex-col items-center">
+        <Header title="Edit Sub Skills " />
 
-          <TextField style={{paddingBottom: '11px'}} type="file" id="images" onChange={imageHandler}  variant="filled" />
-
-          {image && <img style={{ height: '30%', width: '30%' , borderRadius:'9px' }} src={image} />}
-          <LoginButton variant="contained" onClick={editsubCategory}>
-            Edit SubCategory
-          </LoginButton>
-        </Wrapper> */}
-
-        {/* <label style={{ marginBottom: "12px", fontSize: "15px" }} for="cars">
-          Choose a Skills category :
-        </label> */}
-        {/* <select
-          class="form-select"
-          aria-label="select category"
-          value={categoryId}
-          onChange={(e) => handleCategoryId(e)}
-        >
-          <option value={""}>Select a Skills Category.......</option>
-          {categoryData.map((item, index) => {
-            return (
-              <option id={item?._id} value={item?._id}>
-                {item?.name}
-              </option>
-            );
-          })}
-        </select> */}
-
-        <form>
-          <div class="form-group">
+        <form className="h-[20rem] w-[35rem] bg-gray-100 border border-2 border-black rounded flex justify-center items-center ">
+          <div class="">
             <label
               for="exampleInputEmail1"
-              style={{ marginBottom: "12px", fontSize: "15px" }}
+              style={{ marginBottom: "12px", fontSize: "18px", fontWeight: "bold", marginLeft: "3.5rem" }}
             >
-             Skills Sub Category Name :
-            </label>
+            Sub Skills Name :
+            </label><br />
             <input
               type="text"
               value={subCategoryName}
               onChange={(e) => setSubCategoryName(e.target.value)}
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter Category Name"
+              className="bg-white text-black border border-solid border-black"
+              placeholder="Enter Sub Skills Name"
             />
           </div>
-          {/* <div class="mb-3">
-            <label
-              for="formFile"
-              style={{ marginBottom: "12px", fontSize: "15px" }}
-              class="form-label"
-            >
-              Upload Image :
-            </label>
-            <input
-              id="images"
-              onChange={imageHandler}
-              class="form-control"
-              type="file"
-            />
-            {image && (
-              <img
-                style={{
-                  height: "30%",
-                  width: "30%",
-                  marginTop: "12px",
-                  borderRadius: "9px",
-                }}
-                src={image}
-              />
-            )}
-          </div> */}
           <button
-            class="btn btn-primary mt-4"
+            class="btn btn-primary mt-4 w-24"
             style={{ backgroundColor: "rgb(3, 201, 215)" }}
             onClick={editsubCategory}
           >
-            Edit Skills Sub Category
+            Submit
           </button>
         </form>
       </div>

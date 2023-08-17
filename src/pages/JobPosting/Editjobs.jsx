@@ -23,7 +23,11 @@ const EditJobs = () => {
   const [selectCategory, setSelectCategory] = useState(null);
   const [selectSubCategory, setSelectSubCategory] = useState(null);
   const [selectClient, setSelectClient] = useState(null);
-  // const [hide, setHide] = useState(false);
+
+  const [skillsData, setSkillData] = useState([]);
+  const [subSkillsData, setSubSkillsData] = useState([]);
+  const [clientData, setClientData] = useState([]);
+
   const navigate = useNavigate();
 
   const params = useParams();
@@ -33,10 +37,7 @@ const EditJobs = () => {
     let result = await HttpClient.requestData("category", "GET");
     console.log("categorydata", result.data);
     if (result && result.status) {
-      setJobData((prevData) => ({
-        ...prevData,
-        category: result.data,
-      }));
+      setSkillData(result.data);
     } else {
       toast.error("Error to fetch Category Data");
     }
@@ -51,26 +52,28 @@ const EditJobs = () => {
 
     if (result && result.status) {
       try {
-        setJobData((prevData) => ({
-          ...prevData,
-          subcategory: result.data,
-        }));
-        console.log("subcategory data", result);
+        setSubSkillsData(result.data);
+        console.log("subcategorydata", result);
       } catch (error) {
         console.log(error.message);
       }
     }
   };
 
+  useEffect(() => {
+    fetchSubCategoryData(jobData.category);
+  }, [jobData.category]);
+
   //  fetch client data
   const fetchClientData = async () => {
     let result = await HttpClient.requestData("client", "GET");
 
     if (result && result.status) {
-      setJobData((prevData) => ({
-        ...prevData,
-        client: result.data,
-      }));
+      // setJobData((prevData) => ({
+      //   ...prevData,
+      //   client: result.data,
+      // }));
+      setClientData(result.data);
       console.log("Clientdata", result.data);
     } else {
       console.log("Client data Can not fetch");
@@ -78,20 +81,19 @@ const EditJobs = () => {
   };
 
   //handle category id
-    const handleCategoryId = (e) => {
-      const categoryId = e.target.value;
-      const category = jobData.category.find((item) => item._id === categoryId);
-      // setHide(category === null);  // Check if this logic is hiding the dropdown as intended
-      setSelectCategory(category);
-      fetchSubCategoryData(categoryId);
-      console.log("categoryId", categoryId);
+  const handleCategoryId = (e) => {
+    const categoryId = e.target.value;
+    const category = skillsData.find((item) => item._id === categoryId);
+    // setHide(category === null);  // Check if this logic is hiding the dropdown as intended
+    setSelectCategory(category);
+    fetchSubCategoryData(categoryId);
+    console.log("categoryId", categoryId);
   };
-  
 
   // handle subcategory id
   const handleSubCategoryId = (e) => {
     const subCategoryId = e.target.value;
-    const subCategory = jobData.subcategory.find(
+    const subCategory = subSkillsData.find(
       (item) => item._id === subCategoryId
     );
     // setHide(subCategory === null);
@@ -102,7 +104,7 @@ const EditJobs = () => {
 
   const handleClientId = (e) => {
     const clientId = e.target.value;
-    const client = jobData.client.find((client) => client._id === clientId);
+    const client = clientData.find((client) => client._id === clientId);
     // setHide(client === null);
     setSelectClient(client);
     console.log("clientId", clientId);
@@ -116,20 +118,30 @@ const EditJobs = () => {
       console.log("filterData", filterData[0]);
 
       if (filterData) {
-        setJobData(filterData[0]);
+        setJobData({
+          title: filterData[0]?.title,
+          location: filterData[0]?.location,
+          rate: filterData[0]?.rate,
+          roles: filterData[0]?.roles,
+          requiements: filterData[0]?.requiements,
+          jobStatus: filterData[0]?.jobStatus,
+          category: filterData[0]?.category_data[0]?._id,
+          subcategory: filterData[0]?.subcategory_data[0]?._id,
+          client: filterData[0]?.client_data[0]?._id,
+        });
       }
     } else {
       toast.error("Error to fetch Consultant Data");
     }
-  }
+  };
+
+  console.log("jobdata_category", jobData);
 
   useEffect(() => {
     fetchJobData();
     fetchCategoryData();
-    fetchSubCategoryData();
     fetchClientData();
   }, []);
-
 
   const handleUpdatePost = async (e) => {
     e.preventDefault();
@@ -140,13 +152,15 @@ const EditJobs = () => {
       rate: jobData.rate,
       roles: jobData.roles,
       requiements: jobData.requiements,
-      jobStatus: jobData.status,
-      categoryid: selectCategory ? selectCategory._id : null,
-      subcategoryid: selectSubCategory ? selectSubCategory._id : null,
-      client: selectClient ? selectClient._id : null,
+      jobStatus: jobData.jobStatus,
+      categoryid: selectCategory ? selectCategory._id : jobData.category,
+      subcategoryid: selectSubCategory
+        ? selectSubCategory._id
+        : jobData.subcategory,
+      client: selectClient ? selectClient._id : jobData.client,
     };
 
-    console.log(data);
+    console.log("data", data);
 
     let result = await HttpClient.requestData(`/job/${params.id}`, "PUT", data);
     console.log("job post", result);
@@ -163,7 +177,10 @@ const EditJobs = () => {
     <>
       <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl flex flex-col items-center">
         <Header title="Update Job post" />
-        <form action="" className="p-4 rounded w-[40rem] bg-gray-100 border border-2 border-black">
+        <form
+          action=""
+          className="p-4 rounded w-[40rem] bg-gray-100 border border-2 border-black"
+        >
           {/* job title */}
           <div className="flex justify-between">
             <div>
@@ -256,11 +273,11 @@ const EditJobs = () => {
               <br />
               <input
                 type="text"
-                value={jobData.status}
+                value={jobData.jobStatus}
                 onChange={(e) =>
                   setJobData({
                     ...jobData,
-                    status: e.target.value,
+                    jobStatus: e.target.value,
                   })
                 }
                 placeholder="Job Status"
@@ -279,17 +296,21 @@ const EditJobs = () => {
             </div>
             <select
               className="bg-white w-[37rem] h-12 rounded pl-4 text-black border border-solid border-black"
-              value={selectCategory ? selectCategory._id : ""}
+              value={selectCategory ? selectCategory._id : jobData.category}
+              // value={jobData.category}
               onChange={(e) => handleCategoryId(e)}
             >
               <option value={""}>Select a Skills</option>
 
-              {Array.isArray(jobData.category) &&
-                jobData.category.map((item, index) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
-                  </option>
-                ))}
+              {skillsData.map((item, index) => (
+                <option
+                  key={item._id}
+                  value={item._id}
+                  selected={item._id === jobData.category}
+                >
+                  {item.name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -303,16 +324,21 @@ const EditJobs = () => {
             </div>
             <select
               className="bg-white w-[37rem] h-12 rounded pl-4 text-black border border-solid border-black"
-              value={selectSubCategory ? selectSubCategory._id : ""}
+              value={
+                selectSubCategory ? selectSubCategory._id : jobData.subcategory
+              }
               onChange={(e) => handleSubCategoryId(e)}
             >
               <option value={""}>Select Sub Skills</option>
-              {Array.isArray(jobData.subcategory) &&
-                jobData.subcategory.map((item, index) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
-                  </option>
-                ))}
+              {subSkillsData.map((item, index) => (
+                <option
+                  key={item._id}
+                  value={item._id}
+                  selected={item._id === jobData.subcategory}
+                >
+                  {item.name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -323,22 +349,28 @@ const EditJobs = () => {
             </div>
             <select
               className="bg-white w-[37rem] h-12 rounded pl-4 text-black border border-solid border-black"
-              value={selectClient ? selectClient._id : ""}
+              value={selectClient ? selectClient._id : jobData.client}
               onChange={(e) => handleClientId(e)}
             >
               <option value={""}>Select Client</option>
 
-              {Array.isArray(jobData.client) &&
-                jobData.client.map((client, index) => (
-                  <option key={client._id} value={client._id}>
-                    {client.firstname}
-                  </option>
-                ))}
+              {clientData.map((client, index) => (
+                <option
+                  key={client._id}
+                  value={client._id}
+                  selected={client._id === jobData.client}
+                >
+                  {client.firstname}
+                </option>
+              ))}
             </select>
           </div>
 
           <div className="flex justify-center">
-            <button className="rounded-xl mt-4 w-20 bg-sky-600" onClick={handleUpdatePost}>
+            <button
+              className="rounded-xl mt-4 w-20 bg-sky-600"
+              onClick={handleUpdatePost}
+            >
               Post
             </button>
           </div>

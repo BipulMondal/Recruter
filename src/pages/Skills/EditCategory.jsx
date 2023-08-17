@@ -79,29 +79,27 @@ const EditCategory = () => {
     <>
       {" "}
       {viewLoader ? <Loader /> : null}
-      <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
-        <Header title="Edit Skills Category" />
-        <form>
-          <div class="form-group">
+      <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl flex flex-col items-center">
+        <Header title="Edit Skills " />
+        <form className="flex justify-center items-center w-[35rem] h-[20rem] border border-2 border-black rounded bg-gray-100">
+          <div class="">
             <label for="exampleInputEmail1" style={{ marginBottom: "12px" }}>
-              Skills Category Name
-            </label>
+              Skills Name
+            </label><br />
             <input
               type="email"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter Skills Category Name"
+              className="bg-white text-black border border-solid border-black" 
+              placeholder="Enter Skills"
             />
           </div>
           <button
-            class="btn btn-primary mt-4"
+            class="btn btn-primary mt-4 w-24"
             style={{ backgroundColor: "rgb(3, 201, 215)" }}
             onClick={editCategory}
           >
-            Edit Skills Category
+            Submit
           </button>
         </form>
       </div>

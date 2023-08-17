@@ -17,7 +17,7 @@ const EditClient = () => {
   const navigate = useNavigate();
 
   const params = useParams();
-  console.log("ClientparamsId", params.id)
+  console.log("ClientparamsId", params.id);
 
   //fetch client data
   const fetchClientData = async () => {
@@ -25,17 +25,18 @@ const EditClient = () => {
     console.log("ClientData", result.data);
 
     if (result && result.status) {
-        const filterData = result.data.filter(client => client._id === params.id)
-        console.log("filterData", filterData[0])
+      const filterData = result.data.filter(
+        (client) => client._id === params.id
+      );
+      console.log("filterData", filterData[0]);
 
-        if(filterData){
-            setClientData(filterData[0])
-        }
+      if (filterData) {
+        setClientData(filterData[0]);
+      }
     } else {
       toast.error("Error to fetch Category Data");
     }
   };
-
 
   // submit Updated Client data
   const handleUpdate = async (e) => {
@@ -50,18 +51,20 @@ const EditClient = () => {
     };
 
     console.log(data);
-    let result = await HttpClient.requestData(`client/${params.id}`, "PUT", data);
+    let result = await HttpClient.requestData(
+      `client/${params.id}`,
+      "PUT",
+      data
+    );
 
-    if(result && result.status){
-      toast.success("Client updated Successfully")
-      console.log("Client updated Successfully")
-      navigate("/manage-client")
+    if (result && result.status) {
+      toast.success("Client updated Successfully");
+      console.log("Client updated Successfully");
+      navigate("/manage-client");
+    } else {
+      toast.error("Client updated failed");
+      console.log("Client updated failed");
     }
-    else{
-      toast.error("Client updated failed")
-      console.log("Client updated failed")
-    }
-
   };
 
   // upload image
@@ -73,12 +76,14 @@ const EditClient = () => {
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
       console.log("upload profile data", result);
-      if(result && result.status) {
-          clientData.profile = result.data;
-          toast.success("Resume Upload Successfully")
-      }
-      else{
-        toast.error("Resume Can not be uploaded")
+      if (result && result.status) {
+        setClientData({
+          ...clientData,
+          profile: result.data,
+        });
+        toast.success("Resume Upload Successfully");
+      } else {
+        toast.error("Resume Can not be uploaded");
       }
     } catch (error) {
       console.log("Error uploading profile", error.message);
@@ -92,7 +97,10 @@ const EditClient = () => {
   return (
     <div className="flex flex-col items-center h-auto w-full justify-center p-2">
       <h1>Update Client</h1>
-      <form action="" className="p-4 rounded w-[40rem] bg-gray-100 border border-2 border-black">
+      <form
+        action=""
+        className="p-4 rounded w-[40rem] bg-gray-100 border border-2 border-black"
+      >
         {/* first name */}
         <div className="flex justify-between">
           <div>
@@ -160,7 +168,7 @@ const EditClient = () => {
             />
           </div>
         </div>
-     
+
         {/* location*/}
         <div className="flex justify-between">
           <div>
@@ -201,9 +209,20 @@ const EditClient = () => {
             </button>
           </div>
         </div>
+        <div className="flex mt-6">
+          <span>Present image</span>
+          <img
+            src={HttpClient.IMG_URL + clientData.profile}
+            alt=""
+            style={{ height: "5rem", width: "5rem" }}
+          />
+        </div>
 
         <div className="flex justify-center">
-          <button className="rounded-xl mt-4 w-20" onClick={handleUpdate}>
+          <button
+            className="rounded-xl mt-4 w-20 bg-sky-600"
+            onClick={handleUpdate}
+          >
             Add
           </button>
         </div>

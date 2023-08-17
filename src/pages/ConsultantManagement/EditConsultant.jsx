@@ -20,7 +20,7 @@ const EditConsultant = () => {
     currlocation: "",
     summery: "",
     relocate: null,
-    resume: null,
+    profile: null,
     availableDate: "",
   });
 
@@ -29,19 +29,18 @@ const EditConsultant = () => {
   const [hide, setHide] = useState(false);
   const navigate = useNavigate();
 
+  const [skillData, setSkillData] = useState([]);
+  const [subSkillsData, setSubSkillsData] = useState([]);
+
   const params = useParams();
-  //   console.log("paramsId", params.id)
 
   //fetch category data
   const fetchCategoryData = async () => {
     let result = await HttpClient.requestData("category", "GET");
-    console.log("ApplicantCategoryData", result.data);
+    console.log("FetchCategoryData", result.data);
 
     if (result && result.status) {
-      setApplicantData((prevData) => ({
-        ...prevData,
-        category: result.data,
-      }));
+      setSkillData(result.data);
     } else {
       toast.error("Error to fetch Category Data");
     }
@@ -57,7 +56,26 @@ const EditConsultant = () => {
       console.log("filterData", filterData[0]);
 
       if (filterData) {
-        setApplicantData(filterData[0]);
+        // setApplicantData(filterData[0]);
+        setApplicantData({
+          firstname: filterData[0]?.firstname,
+          lastname: filterData[0]?.lastname,
+          email: filterData[0]?.email,
+          mobile: filterData[0]?.mobile,
+          gender: filterData[0]?.gender,
+          dob: filterData[0]?.dob,
+          qualification: filterData[0]?.qualification,
+          experience: filterData[0]?.experience,
+          category: filterData[0]?.category_data[0]?._id,
+          sub_category: filterData[0]?.subcategory_data[0]?._id,
+          keywords: filterData[0]?.keywords,
+          keytech: filterData[0]?.keytech,
+          currlocation: filterData[0]?.currlocation,
+          summery: filterData[0]?.summery,
+          relocate: filterData[0]?.relocate,
+          profile: filterData[0]?.profile,
+          availableDate: filterData[0]?.availableDate,
+        });
       }
     } else {
       toast.error("Error to fetch Consultant Data");
@@ -67,14 +85,17 @@ const EditConsultant = () => {
   //handle category id
   const handleCategoryId = (e) => {
     const categoryId = e.target.value;
-    const category = applicantData.category.find(
-      (item) => item._id === categoryId
-    );
+    const category = skillData.find((item) => item._id === categoryId);
+
     setHide(category === null);
+
     setSelectCategory(category);
     fetchSubCategoryData(categoryId);
-    console.log("categoryId", categoryId);
   };
+
+  useEffect(() => {
+    fetchSubCategoryData(applicantData.category);
+  }, [applicantData.category]);
 
   // handle subcategory id
   const handleSubCategoryId = (e) => {
@@ -93,14 +114,9 @@ const EditConsultant = () => {
       "GET"
     );
 
-    console.log("categoryId for fetch subcategory", categoryId);
-
     if (result && result.status) {
       try {
-        setApplicantData((prevData) => ({
-          ...prevData,
-          sub_category: result.data,
-        }));
+        setSubSkillsData(result.data);
         console.log("tefchsubcategory.....", result);
       } catch (error) {
         console.log(error.message);
@@ -138,7 +154,7 @@ const EditConsultant = () => {
       keywords: applicantData.keywords,
       dob: applicantData.dob,
       relocate: applicantData.relocate,
-      profile: applicantData.resume,
+      profile: applicantData.profile,
       availableDate: applicantData.availableDate,
       categoryid: selectCategory._id,
       subcategoryid: selectSubCategory._id,
@@ -161,16 +177,22 @@ const EditConsultant = () => {
     }
   };
 
-  // upload resume
+  // upload profile
   const handleImageUpload = async (e) => {
     e.preventDefault();
+
     let data = new FormData();
-    data.append("image", applicantData.resume);
+    data.append("image", applicantData.profile);
+
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
-      console.log("upload resume data", result);
+      console.log("upload profile data", result);
       if (result && result.status) {
-        applicantData.resume = result.data;
+        setApplicantData({
+          ...applicantData,
+          profile: result.data,
+        });
+
         toast.success("Image Upload Successfully");
       } else {
         toast.error("Image Can not be uploaded");
@@ -181,12 +203,13 @@ const EditConsultant = () => {
   };
 
   useEffect(() => {
-    fetchConsultantData();
     fetchCategoryData();
+    fetchConsultantData();
   }, []);
 
   return (
-    <div className="flex h-auto w-full justify-center p-2">
+    <div className="flex h-auto w-full justify-center p-2 flex flex-col items-center">
+      <h1>Edit Consultant</h1>
       <form action="" className="p-4 rounded w-[58rem] bg-gray-200">
         {/* name */}
         <div className="flex justify-between">
@@ -338,22 +361,22 @@ const EditConsultant = () => {
               name="category"
               id="category"
               className="bg-white h-12 w-[25rem] rounded"
-              value={selectCategory ? selectCategory._id : ""}
+              value={
+                selectCategory ? selectCategory._id : applicantData.category
+              }
               onChange={(e) => handleCategoryId(e)}
             >
               <option value={""}>Select Skills</option>
-              {/* <option value="">
-                {applicantData.category.length > 0
-                  ? applicantData.category[0].name
-                  : "Select Skills"}
-              </option> */}
 
-              {Array.isArray(applicantData.category) &&
-                applicantData.category.map((item, index) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
-                  </option>
-                ))}
+              {skillData.map((item, index) => (
+                <option
+                  key={item._id}
+                  value={item._id}
+                  selected={item._id === applicantData.category}
+                >
+                  {item.name}
+                </option>
+              ))}
             </select>
           </div>
           <div>
@@ -363,22 +386,24 @@ const EditConsultant = () => {
               name="subSkills"
               id="subSkills"
               className="bg-white h-12 w-[25rem] rounded"
-              value={selectSubCategory ? selectSubCategory._id : ""}
+              value={
+                selectSubCategory
+                  ? selectSubCategory._id
+                  : applicantData.sub_category
+              }
               onChange={(e) => handleSubCategoryId(e)}
             >
               <option value={""}>Select Sub Skills</option>
-              {/* <option value="">
-                {applicantData.subcategory_data.length > 0
-                  ? applicantData.subcategory_data[0].name
-                  : "Select Sub Skills"}
-              </option> */}
 
-              {Array.isArray(applicantData.sub_category) &&
-                applicantData.sub_category.map((item, index) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
-                  </option>
-                ))}
+              {subSkillsData.map((item, index) => (
+                <option
+                  key={item._id}
+                  value={item._id}
+                  selected={item._id === applicantData.sub_category}
+                >
+                  {item.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -508,10 +533,10 @@ const EditConsultant = () => {
             />
           </div>
         </div>
-        {/* Resume */}
+        {/* image */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Browse Resume</label>
+            <label htmlFor="">Browse image</label>
             <br />
             <input
               type="file"
@@ -520,7 +545,7 @@ const EditConsultant = () => {
               onChange={(e) =>
                 setApplicantData({
                   ...applicantData,
-                  resume: e.target.files[0],
+                  profile: e.target.files[0],
                 })
               }
             />
@@ -533,8 +558,18 @@ const EditConsultant = () => {
           </div>
         </div>
 
+        {/* image preview */}
+        <div className="flex mt-6">
+          <span>Present image</span>
+          <img
+            src={HttpClient.IMG_URL + applicantData.profile}
+            alt=""
+            style={{ height: "5rem", width: "5rem" }}
+          />
+        </div>
+
         <div className="flex justify-center">
-          <button className="rounded-xl mt-4" onClick={handleUpdate}>
+          <button className="rounded-xl mt-4 bg-sky-600" onClick={handleUpdate}>
             Submit
           </button>
         </div>

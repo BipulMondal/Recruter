@@ -192,7 +192,7 @@ const EditClient = () => {
             <br />
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
+              accept="image/*"
               className="bg-white text-black h-12 w-[28rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setClientData({

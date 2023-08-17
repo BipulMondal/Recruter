@@ -120,7 +120,10 @@ const EditRecruiter = () => {
   return (
     <div className="flex flex-col items-center h-auto w-full justify-center p-2">
       <h1>Edit Recruiter</h1>
-      <form action="" className="p-4 rounded w-[58rem] bg-gray-200">
+      <form
+        action=""
+        className="p-4 rounded w-[58rem] bg-gray-100 border border-2 border-black"
+      >
         {/* name */}
         <div className="flex justify-between">
           <div>
@@ -136,7 +139,7 @@ const EditRecruiter = () => {
                 })
               }
               placeholder="First name"
-              className="bg-white w-[25rem] pl-4 text-black"
+              className="bg-white w-[25rem] pl-4 text-black border border-solid border-black"
             />
           </div>
           <div className="">
@@ -149,7 +152,7 @@ const EditRecruiter = () => {
                 setRecruiterData({ ...recruiterData, lastname: e.target.value })
               }
               placeholder="Last name"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -165,7 +168,7 @@ const EditRecruiter = () => {
                 setRecruiterData({ ...recruiterData, email: e.target.value })
               }
               placeholder="Email"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
@@ -178,7 +181,7 @@ const EditRecruiter = () => {
                 setRecruiterData({ ...recruiterData, mobile: e.target.value })
               }
               placeholder="Phone"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -208,14 +211,14 @@ const EditRecruiter = () => {
                 setRecruiterData({ ...recruiterData, profile: e.target.value })
               }
               placeholder="Profile Summary"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
 
           <div>
             <label htmlFor="">Select Gender</label>
             <br />
-            <div className="bg-white h-12 w-[25rem] rounded">
+            <div className="bg-white h-12 w-[25rem] rounded border border-solid border-black">
               <input
                 type="radio"
                 className="mt-2"
@@ -261,7 +264,7 @@ const EditRecruiter = () => {
                 })
               }
               placeholder="Qualification"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
@@ -269,7 +272,7 @@ const EditRecruiter = () => {
             <br />
             <input
               type="date"
-              className="w-[25rem] bg-white text-black"
+              className="w-[25rem] bg-white text-black border border-solid border-black"
               value={recruiterData.dob}
               onChange={(e) => handleDobChange(e)}
             />
@@ -290,7 +293,7 @@ const EditRecruiter = () => {
                 })
               }
               placeholder="Experience"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -302,8 +305,8 @@ const EditRecruiter = () => {
             <br />
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
-              className="bg-white text-black h-12 w-[40rem] rounded"
+              accept="image/*"
+              className="bg-white text-black h-12 w-[40rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setRecruiterData({
                   ...recruiterData,

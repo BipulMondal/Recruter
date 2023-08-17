@@ -210,7 +210,10 @@ const EditConsultant = () => {
   return (
     <div className="flex h-auto w-full justify-center p-2 flex flex-col items-center">
       <h1>Edit Consultant</h1>
-      <form action="" className="p-4 rounded w-[58rem] bg-gray-200">
+      <form
+        action=""
+        className="p-4 rounded w-[58rem] bg-gray-100 border border-2 border-black"
+      >
         {/* name */}
         <div className="flex justify-between">
           <div>
@@ -226,7 +229,7 @@ const EditConsultant = () => {
                 })
               }
               placeholder="First name"
-              className="bg-white w-[25rem] pl-4 text-black"
+              className="bg-white w-[25rem] pl-4 text-black border border-solid border-black"
             />
           </div>
           <div className="">
@@ -239,7 +242,7 @@ const EditConsultant = () => {
                 setApplicantData({ ...applicantData, lastname: e.target.value })
               }
               placeholder="Last name"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -255,7 +258,7 @@ const EditConsultant = () => {
                 setApplicantData({ ...applicantData, email: e.target.value })
               }
               placeholder="Email"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
@@ -268,7 +271,7 @@ const EditConsultant = () => {
                 setApplicantData({ ...applicantData, mobile: e.target.value })
               }
               placeholder="Phone"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -277,7 +280,7 @@ const EditConsultant = () => {
           <div>
             <label htmlFor="">Select Gender</label>
             <br />
-            <div className="bg-white h-12 w-[25rem] rounded">
+            <div className="bg-white h-12 w-[25rem] rounded border border-solid border-black">
               <input
                 type="radio"
                 className="mt-2"
@@ -311,7 +314,7 @@ const EditConsultant = () => {
             <br />
             <input
               type="date"
-              className="w-[25rem] bg-white text-black"
+              className="w-[25rem] bg-white text-black border border-solid border-black"
               value={applicantData.dob}
               onChange={(e) => handleDobChange(e)}
             />
@@ -332,7 +335,7 @@ const EditConsultant = () => {
                 })
               }
               placeholder="Qualification"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
@@ -348,7 +351,7 @@ const EditConsultant = () => {
                 })
               }
               placeholder="Experience"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -360,7 +363,7 @@ const EditConsultant = () => {
             <select
               name="category"
               id="category"
-              className="bg-white h-12 w-[25rem] rounded"
+              className="bg-white h-12 w-[25rem] rounded border border-solid border-black"
               value={
                 selectCategory ? selectCategory._id : applicantData.category
               }
@@ -385,7 +388,7 @@ const EditConsultant = () => {
             <select
               name="subSkills"
               id="subSkills"
-              className="bg-white h-12 w-[25rem] rounded"
+              className="bg-white h-12 w-[25rem] rounded border border-solid border-black"
               value={
                 selectSubCategory
                   ? selectSubCategory._id
@@ -423,7 +426,7 @@ const EditConsultant = () => {
                 })
               }
               placeholder="Key Technologies"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
@@ -439,7 +442,7 @@ const EditConsultant = () => {
                 })
               }
               placeholder="Key Word"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -453,7 +456,7 @@ const EditConsultant = () => {
               type="text"
               value={applicantData.currlocation}
               placeholder="Current Location"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
               onChange={(e) =>
                 setApplicantData({
                   ...applicantData,
@@ -466,7 +469,7 @@ const EditConsultant = () => {
           <div>
             <label htmlFor="">Willing to Relocate ?</label>
             <br />
-            <div className="bg-white h-12 w-[25rem] rounded">
+            <div className="bg-white h-12 w-[25rem] rounded border border-solid border-black">
               <input
                 type="radio"
                 className="mt-2"
@@ -502,18 +505,15 @@ const EditConsultant = () => {
           <div>
             <label htmlFor="">Enter Profile Summary</label>
             <br />
-            <textarea
-              name=""
-              id=""
-              cols="25"
-              rows="2"
+            <input
+              type="text"
               placeholder="Profile Summary"
-              className="rounded w-[25rem] text-black"
+              className="rounded w-[25rem] text-black border border-solid border-black bg-white tect-black"
               value={applicantData.summery}
               onChange={(e) =>
                 setApplicantData({ ...applicantData, summery: e.target.value })
               }
-            ></textarea>
+            />
           </div>
 
           <div>
@@ -521,7 +521,7 @@ const EditConsultant = () => {
             <br />
             <input
               type="text"
-              className="bg-white text-black h-12 w-[25rem] rounded"
+              className="bg-white text-black h-12 w-[25rem] rounded border border-solid border-black"
               placeholder="Available date"
               value={applicantData.availableDate}
               onChange={(e) =>
@@ -540,8 +540,8 @@ const EditConsultant = () => {
             <br />
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
-              className="bg-white text-black h-12 w-[40rem] rounded"
+              accept="image/*"
+              className="bg-white text-black h-12 w-[40rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setApplicantData({
                   ...applicantData,

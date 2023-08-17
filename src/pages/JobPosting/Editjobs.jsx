@@ -163,7 +163,7 @@ const EditJobs = () => {
     <>
       <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl flex flex-col items-center">
         <Header title="Update Job post" />
-        <form action="" className="p-4 rounded w-[45rem] bg-gray-200">
+        <form action="" className="p-4 rounded w-[40rem] bg-gray-100 border border-2 border-black">
           {/* job title */}
           <div className="flex justify-between">
             <div>
@@ -179,7 +179,7 @@ const EditJobs = () => {
                   })
                 }
                 placeholder="Enter Job Title"
-                className="bg-white w-[41rem] pl-4 text-black"
+                className="bg-white w-[37rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
@@ -195,7 +195,7 @@ const EditJobs = () => {
                   setJobData({ ...jobData, location: e.target.value })
                 }
                 placeholder="Enter Location"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[37rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
@@ -211,7 +211,7 @@ const EditJobs = () => {
                   setJobData({ ...jobData, rate: e.target.value })
                 }
                 placeholder="Enter rate"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[37rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
@@ -227,7 +227,7 @@ const EditJobs = () => {
                   setJobData({ ...jobData, roles: e.target.value })
                 }
                 placeholder="Enter Roles"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[37rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
@@ -240,7 +240,7 @@ const EditJobs = () => {
               <input
                 type="text"
                 placeholder="Enter Requirements"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[37rem] pl-4 text-black border border-solid border-black"
                 value={jobData.requiements}
                 onChange={(e) =>
                   setJobData({ ...jobData, requiements: e.target.value })
@@ -264,7 +264,7 @@ const EditJobs = () => {
                   })
                 }
                 placeholder="Job Status"
-                className="bg-white w-[41rem] pl-4 text-black"
+                className="bg-white w-[37rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
@@ -278,7 +278,7 @@ const EditJobs = () => {
               </span>
             </div>
             <select
-              className="bg-white h-12 w-[41rem] rounded"
+              className="bg-white w-[37rem] h-12 rounded pl-4 text-black border border-solid border-black"
               value={selectCategory ? selectCategory._id : ""}
               onChange={(e) => handleCategoryId(e)}
             >
@@ -302,7 +302,7 @@ const EditJobs = () => {
               </span>
             </div>
             <select
-              className="bg-white h-12 w-[41rem] rounded"
+              className="bg-white w-[37rem] h-12 rounded pl-4 text-black border border-solid border-black"
               value={selectSubCategory ? selectSubCategory._id : ""}
               onChange={(e) => handleSubCategoryId(e)}
             >
@@ -320,12 +320,9 @@ const EditJobs = () => {
           <div>
             <div className="flex justify-between">
               <label htmlFor="">Select Client</label>
-              <span>
-                {/* <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} /> */}
-              </span>
             </div>
             <select
-              className="bg-white h-12 w-[41rem] rounded"
+              className="bg-white w-[37rem] h-12 rounded pl-4 text-black border border-solid border-black"
               value={selectClient ? selectClient._id : ""}
               onChange={(e) => handleClientId(e)}
             >
@@ -341,7 +338,7 @@ const EditJobs = () => {
           </div>
 
           <div className="flex justify-center">
-            <button className="rounded-xl mt-4" onClick={handleUpdatePost}>
+            <button className="rounded-xl mt-4 w-20 bg-sky-600" onClick={handleUpdatePost}>
               Post
             </button>
           </div>

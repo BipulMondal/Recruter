@@ -41,15 +41,15 @@ const ManageSubCategory = () => {
       let arr = result?.data.map((client, index) => {
         return {
           sl: index + 1,
-          FirstName: (
+          Name: (
             <div style={{ fontSize: "13px" }}>
-             {client?.firstname}
+             {client?.firstname + client?.lastname}
             </div>
           ),
-          LastName: (
-            <div style={{ fontSize: "13px" }}>{client?.lastname}</div>
+          // LastName: (
+          //   <div style={{ fontSize: "13px" }}>{client?.lastname}</div>
 
-          ),
+          // ),
           Email: (
             <div style={{ fontSize: "13px" }}>{client?.email}</div>
 
@@ -63,7 +63,8 @@ const ManageSubCategory = () => {
 
           ),
           Profile: (
-            <div style={{ fontSize: "13px" }}>{client?.profile}</div>
+            // <div style={{ fontSize: "13px" }}>{client?.profile}</div>
+            <img src={HttpClient.IMG_URL + client?.profile} alt="" />
 
           ),
           Action: (
@@ -162,19 +163,19 @@ const ManageSubCategory = () => {
     {
       name: (
         <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          FirstName
+          Name
         </div>
       ),
-      selector: (row) => row.FirstName,
+      selector: (row) => row.Name,
     },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          LastName
-        </div>
-      ),
-      selector: (row) => row.LastName,
-    },
+    // {
+    //   name: (
+    //     <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+    //       LastName
+    //     </div>
+    //   ),
+    //   selector: (row) => row.LastName,
+    // },
     {
       name: (
         <div

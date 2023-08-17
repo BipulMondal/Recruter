@@ -46,7 +46,7 @@ const EditClient = () => {
       email: clientData.email,
       mobile: clientData.mobile,
       currlocation: clientData.currlocation,
-      profile: clientData.resume,
+      profile: clientData.profile,
     };
 
     console.log(data);
@@ -64,23 +64,24 @@ const EditClient = () => {
 
   };
 
-  // upload resume
-  const handleResumeUpload = async (e) => {
+  // upload image
+  const handleImageUpload = async (e) => {
     e.preventDefault();
+
     let data = new FormData();
-    data.append("image", clientData.resume);
+    data.append("image", clientData.profile);
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
-      console.log("upload resume data", result);
+      console.log("upload profile data", result);
       if(result && result.status) {
-          clientData.resume = result.data;
+          clientData.profile = result.data;
           toast.success("Resume Upload Successfully")
       }
       else{
         toast.error("Resume Can not be uploaded")
       }
     } catch (error) {
-      console.log("Error uploading resume", error.message);
+      console.log("Error uploading profile", error.message);
     }
   };
 
@@ -89,8 +90,9 @@ const EditClient = () => {
   }, []);
 
   return (
-    <div className="flex h-auto w-full justify-center p-2">
-      <form action="" className="p-4 rounded w-[45rem] bg-gray-200">
+    <div className="flex flex-col items-center h-auto w-full justify-center p-2">
+      <h1>Update Client</h1>
+      <form action="" className="p-4 rounded w-[40rem] bg-gray-100 border border-2 border-black">
         {/* first name */}
         <div className="flex justify-between">
           <div>
@@ -106,7 +108,7 @@ const EditClient = () => {
                 })
               }
               placeholder="First name"
-              className="bg-white w-[41rem] pl-4 text-black"
+              className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -122,7 +124,7 @@ const EditClient = () => {
                 setClientData({ ...clientData, lastname: e.target.value })
               }
               placeholder="Last name"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -138,7 +140,7 @@ const EditClient = () => {
                 setClientData({ ...clientData, email: e.target.value })
               }
               placeholder="Email"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -154,7 +156,7 @@ const EditClient = () => {
                 setClientData({ ...clientData, mobile: e.target.value })
               }
               placeholder="Phone"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -168,22 +170,22 @@ const EditClient = () => {
               type="text"
               value={clientData.currlocation}
               placeholder="Current Location"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
               onChange={(e) =>
                 setClientData({ ...clientData, currlocation: e.target.value })
               }
             />
           </div>
         </div>
-        {/* Resume */}
+        {/* upload Image */}
         <div className="flex justify-between">
           <div>
-            <label htmlFor="">Browse Resume</label>
+            <label htmlFor="">Browse image</label>
             <br />
             <input
               type="file"
               accept=".pdf,.doc,.docx"
-              className="bg-white text-black h-12 w-[32rem] rounded"
+              className="bg-white text-black h-12 w-[28rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setClientData({
                   ...clientData,
@@ -193,9 +195,9 @@ const EditClient = () => {
             />
             <button
               className="bg-white text-black border border-2 rounded h-12"
-              onClick={handleResumeUpload}
+              onClick={handleImageUpload}
             >
-              Upload Resume
+              Upload image
             </button>
           </div>
         </div>

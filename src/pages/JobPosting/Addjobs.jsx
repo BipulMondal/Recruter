@@ -155,14 +155,14 @@ const Addjobs = () => {
     <>
       <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl flex flex-col items-center">
         <Header title="Add Job post" />
-        <form action="" className="p-4 rounded w-[45rem] bg-gray-200">
+        <form action="" className="p-4 rounded w-[39rem] bg-gray-100 border border-2 border-black">
           {/* job title */}
           <div className="flex justify-between">
             <div>
-              <div className="flex justify-between">
+              <div className="flex">
               <label htmlFor="">Enter Job Title</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
               </div>
               <input
@@ -175,17 +175,17 @@ const Addjobs = () => {
                   })
                 }
                 placeholder="Enter Job Title"
-                className="bg-white w-[41rem] pl-4 text-black"
+                className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
           {/* location */}
           <div className="flex justify-between">
             <div className="">
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Enter Location</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
               </div>
               <input
@@ -195,17 +195,17 @@ const Addjobs = () => {
                   setJobData({ ...jobData, location: e.target.value })
                 }
                 placeholder="Enter Location"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
           {/* rate */}
           <div className="flex justify-between">
             <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Enter Rate</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
               </div>
               <input
@@ -215,17 +215,17 @@ const Addjobs = () => {
                   setJobData({ ...jobData, rate: e.target.value })
                 }
                 placeholder="Enter rate"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
           {/* roles */}
           <div className="flex justify-between">
             <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Enter Roles</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
               </div>
               <input
@@ -235,7 +235,7 @@ const Addjobs = () => {
                   setJobData({ ...jobData, roles: e.target.value })
                 }
                 placeholder="Enter Roles"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
@@ -243,16 +243,16 @@ const Addjobs = () => {
           {/* requirement*/}
           <div className="flex justify-between">
             <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Enter Requirement</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
               </div>
               <input
                 type="text"
                 placeholder="Enter Requirements"
-                className="bg-white w-[41rem] text-black"
+                className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
                 value={jobData.requiements}
                 onChange={(e) =>
                   setJobData({ ...jobData, requiements: e.target.value })
@@ -264,10 +264,10 @@ const Addjobs = () => {
           {/* job status */}
           <div className="flex justify-between">
             <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Enter Job Status</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
               </div>
               <input
@@ -280,23 +280,23 @@ const Addjobs = () => {
                   })
                 }
                 placeholder="Job Status"
-                className="bg-white w-[41rem] pl-4 text-black"
+                className="bg-white w-[36rem] pl-4 text-black border border-solid border-black"
               />
             </div>
           </div>
 
           {/* select skills */}
           <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Select Skills</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
             </div>
             <select
               name="category"
               id="category"
-              className="bg-white h-12 w-[41rem] rounded"
+              className="bg-white w-[36rem] h-12 pl-4 rounded text-black border border-solid border-black"
               value={selectCategory ? selectCategory._id : ""}
               onChange={(e) => handleCategoryId(e)}
             >
@@ -313,16 +313,16 @@ const Addjobs = () => {
 
           {/* select sub skills */}
           <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Select Sub Skills</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
             </div>
             <select
               name="category"
               id="category"
-              className="bg-white h-12 w-[41rem] rounded"
+              className="bg-white w-[36rem] h-12 pl-4 rounded text-black border border-solid border-black"
               value={selectSubCategory ? selectSubCategory._id : ""}
               onChange={(e) => handleSubCategoryId(e)}
             >
@@ -339,16 +339,16 @@ const Addjobs = () => {
 
           {/* client */}
           <div>
-            <div className="flex justify-between">
+            <div className="flex">
               <label htmlFor="">Select Client</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
             </div>
             <select
               // name="client"
               // id="client"
-              className="bg-white h-12 w-[41rem] rounded"
+              className="bg-white w-[36rem] h-12 rounded pl-4 text-black border border-solid border-black"
               value={selectClient ? selectClient._id : ""}
               onChange={(e) => handleClientId(e)}
             >
@@ -364,7 +364,7 @@ const Addjobs = () => {
           </div>
 
           <div className="flex justify-center">
-            <button className="rounded-xl mt-4" onClick={handlePost}>
+            <button className="rounded-xl mt-4 w-20 font-bold bg-sky-500" onClick={handlePost}>
               Post
             </button>
           </div>

@@ -94,10 +94,10 @@ const SubCategory = () => {
         <Header title="Add Sub Skills" />
         
         <label style={{ marginBottom: "12px", fontSize: "18px", fontWeight: "bold" }} for="cars">
-          Choose a Sub Skills:
+          Choose a Skill:
         </label>
         <select
-          class="w-[20rem] h-[3rem] rounded border-2 border-solid border-black"
+          class="w-[20rem] h-[3rem] rounded border-2 border-solid border-black bg-white"
           aria-label="select category"
           value={categoryId}
           onChange={(e) => handleCategoryId(e)}
@@ -117,7 +117,7 @@ const SubCategory = () => {
               for="exampleInputEmail1"
               style={{ marginBottom: "12px", marginLeft: "3.5rem", fontSize: "18px", fontWeight: "bold" }}
             >
-              Sub Skills Name :
+              Sub Skill Name :
             </label>
             <input
               type="text"

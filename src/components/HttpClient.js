@@ -3,6 +3,8 @@ import { reactLocalStorage } from "reactjs-localstorage";
 
 export const BASE_URL = "http://13.127.222.180:1200/v1/admin/";
 
+const IMG_URL ="http://13.127.222.180:1200/"
+
 async function requestData(url, method, params = {}) {
   let token = "";
   let user = reactLocalStorage.getObject("adminData");
@@ -446,6 +448,7 @@ export default {
   videoUpload,
   uploadFileRequest,
   fileUplodeDynamic,
+  IMG_URL,
   // get,
   // post,
   // put,

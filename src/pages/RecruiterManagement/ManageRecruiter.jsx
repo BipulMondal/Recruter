@@ -19,7 +19,7 @@ const ManageRecruiter = () => {
   const onRecruiterDelete = async (recruiterId) => {
     alert("Are you really want to delete this client ?");
     let data = {
-      categoryID: recruiterId
+      categoryID: recruiterId,
     };
     let endpoint = `recruiter/${recruiterId}`;
     let result = await HttpClient.requestData(endpoint, "DELETE", data);
@@ -36,7 +36,7 @@ const ManageRecruiter = () => {
   const fetchRecruiterdata = async () => {
     let result = await HttpClient.requestData("recruiter", "GET");
 
-    console.log("Recruiter result", result.data)
+    console.log("Recruiter result", result.data);
 
     if (result) {
       let arr = result?.data.map((recruiter, index) => {
@@ -44,24 +44,17 @@ const ManageRecruiter = () => {
           sl: index + 1,
           Name: (
             <div style={{ fontSize: "13px" }}>
-             {recruiter?.firstname + recruiter?.lastname}
+              {recruiter?.firstname + recruiter?.lastname}
             </div>
           ),
           // LastName: (
           //   <div style={{ fontSize: "13px" }}>{recruiter?.lastname}</div>
 
           // ),
-          Email: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.email}</div>
-
-          ),
-          Mobile: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.mobile}</div>
-
-          ),
+          Email: <div style={{ fontSize: "13px" }}>{recruiter?.email}</div>,
+          Mobile: <div style={{ fontSize: "13px" }}>{recruiter?.mobile}</div>,
           Experience: (
             <div style={{ fontSize: "13px" }}>{recruiter?.experience}</div>
-
           ),
           // Gender: (
           //   <div style={{ fontSize: "13px" }}>{recruiter?.gender}</div>
@@ -71,43 +64,42 @@ const ManageRecruiter = () => {
           //   <div style={{ fontSize: "13px" }}>{recruiter?.dob}</div>
 
           // ),
-          Summery: (
-            <div style={{ fontSize: "13px" }}>{recruiter?.summery}</div>
-
-          ),
+          Summery: <div style={{ fontSize: "13px" }}>{recruiter?.summery}</div>,
           Qualification: (
             <div style={{ fontSize: "13px" }}>{recruiter?.qualification}</div>
-
           ),
           Profile: (
-            // <div style={{ fontSize: "13px" }}>{recruiter?.profile}</div>
-              <img src={recruiter?.profile} alt="Uploaded Profile" className="h-10 w-10 rounded-full"/>
-  
-
+            <div style={{ fontSize: "13px" }}>
+              <img
+                src={HttpClient.IMG_URL + recruiter?.profile}
+                alt="Uploaded Profile"
+                className="h-16 w-16"
+              />
+            </div>
           ),
           Action: (
             <div style={{ display: "flex", flexDirection: "coloum" }}>
               <Link to={`/edit-recruiter/${recruiter._id}`}>
-              <svg
-                style={{
-                  height: "20px",
-                  width: "20px",
-                  cursor: "pointer",
-                  marginRight: "34px",
-                }}
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-pencil-square"
-                viewBox="0 0 16 16"
-              >
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                <path
-                  fill-rule="evenodd"
-                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                />
-              </svg>
+                <svg
+                  style={{
+                    height: "20px",
+                    width: "20px",
+                    cursor: "pointer",
+                    marginRight: "34px",
+                  }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pencil-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
               </Link>
               <svg
                 onClick={() => onRecruiterDelete(recruiter._id)}
@@ -126,22 +118,22 @@ const ManageRecruiter = () => {
               >
                 <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
               </svg>
-             
             </div>
           ),
           Status: (
             <button
-            className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
-            onClick={() => handleStatusChange(recruiter._id, recruiter.status)}
-          >
-            {recruiter.status ? "inActive" : "Active"}
-          </button>
-          )
-
+              className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
+              onClick={() =>
+                handleStatusChange(recruiter._id, recruiter.status)
+              }
+            >
+              {recruiter.status ? "inActive" : "Active"}
+            </button>
+          ),
         };
       });
 
-      console.log(arr)
+      console.log(arr);
       setRecruiterData(arr);
     }
   };
@@ -151,7 +143,7 @@ const ManageRecruiter = () => {
     let data = {
       categoryID: recruiterId,
     };
-    console.log("selected id", data)
+    console.log("selected id", data);
 
     let resultStatus = await HttpClient.requestData(
       `recruiter/set-status/${recruiterId}`,
@@ -161,16 +153,15 @@ const ManageRecruiter = () => {
 
     console.log("handlechange.....", resultStatus.data.status);
     setRecruiterData((prevData) =>
-    prevData.map((recruiter) =>
-    recruiter._id === recruiterId
-        ? { ...recruiter, status: resultStatus.data.status }
-        : recruiter
-    )
-  );
+      prevData.map((recruiter) =>
+        recruiter._id === recruiterId
+          ? { ...recruiter, status: resultStatus.data.status }
+          : recruiter
+      )
+    );
 
-  await fetchRecruiterdata();
+    await fetchRecruiterdata();
   };
-
 
   const columns = [
     // {
@@ -179,11 +170,7 @@ const ManageRecruiter = () => {
     // },
 
     {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          Name
-        </div>
-      ),
+      name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>Name</div>,
       selector: (row) => row.Name,
     },
     // {
@@ -206,17 +193,13 @@ const ManageRecruiter = () => {
     },
     {
       name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          Mobile
-        </div>
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>Mobile</div>
       ),
       selector: (row) => row.Mobile,
     },
     {
       name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          Experience
-        </div>
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>Experience</div>
       ),
       selector: (row) => row.Experience,
     },
@@ -236,31 +219,24 @@ const ManageRecruiter = () => {
     //   ),
     //   selector: (row) => row.DOB,
     // },
-      {
-        name: (
-          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            Profile
-          </div>
-        ),
-        selector: (row) => row.Profile,
-      },
-      {
-        name: (
-          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            Action
-          </div>
-        ),
-        selector: (row) => row.Action,
-      },
-      {
-        name: (
-          <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            Status
-          </div>
-        ),
-        selector: (row) => row.Status,
-      },
-
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>Profile</div>
+      ),
+      selector: (row) => row.Profile,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>Action</div>
+      ),
+      selector: (row) => row.Action,
+    },
+    {
+      name: (
+        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>Status</div>
+      ),
+      selector: (row) => row.Status,
+    },
   ];
 
   return (

@@ -85,14 +85,14 @@ const AddApplicant = () => {
   return (
     <div className="flex flex-col h-auto w-full justify-center items-center p-2">
       <h1>Add Client</h1>
-      <form action="" className="p-4 rounded w-[45rem] bg-gray-200">
+      <form action="" className="p-4 rounded w-[45rem] bg-gray-100 border border-2 border-black">
         {/* first name */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter First Name</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
           </div>
             <input
@@ -105,17 +105,17 @@ const AddApplicant = () => {
                 })
               }
               placeholder="First name"
-              className="bg-white w-[41rem] pl-4 text-black"
+              className="bg-white w-[41rem] pl-4 text-black border border-solid border-black"
             />
           </div>
         </div>
         {/* last name */}
         <div className="flex justify-between">
           <div className="">
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Last Name</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
           </div>
             <input
@@ -125,17 +125,17 @@ const AddApplicant = () => {
                 setClientData({ ...clientData, lastname: e.target.value })
               }
               placeholder="Last name"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[41rem] text-black border border-solid border-black"
             />
           </div>
         </div>
         {/* gmail */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Email</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
           </div>
             <input
@@ -145,17 +145,17 @@ const AddApplicant = () => {
                 setClientData({ ...clientData, email: e.target.value })
               }
               placeholder="Email"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[41rem] text-black border border-solid border-black"
             />
           </div>
         </div>
         {/* mobile */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Mobile</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
           </div>
             <input
@@ -165,7 +165,7 @@ const AddApplicant = () => {
                 setClientData({ ...clientData, phone: e.target.value })
               }
               placeholder="Phone"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[41rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -173,17 +173,17 @@ const AddApplicant = () => {
         {/* location*/}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Location</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
               </span>
           </div>
             <input
               type="text"
               value={clientData.currlocation}
               placeholder="Current Location"
-              className="bg-white w-[41rem] text-black"
+              className="bg-white w-[41rem] text-black border border-solid border-black"
               onChange={(e) =>
                 setClientData({ ...clientData, currlocation: e.target.value })
               }
@@ -198,7 +198,7 @@ const AddApplicant = () => {
             <input
               type="file"
               accept=".pdf,.doc,.docx"
-              className="bg-white text-black h-12 w-[32rem] rounded"
+              className="bg-white text-black h-12 w-[32rem] rounded border border-solid border-black" 
               onChange={(e) =>
                 setClientData({
                   ...clientData,

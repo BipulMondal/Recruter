@@ -132,14 +132,14 @@ const AddApplicant = () => {
   return (
     <div className="flex flex-col items-center h-auto w-full justify-center p-2">
       <h1>Add Recruiter</h1>
-      <form action="" className="p-4 rounded w-[58rem] bg-gray-200">
+      <form action="" className="p-4 rounded w-[58rem] bg-gray-100 border border-2 border-black">
         {/* name */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter First Name</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -152,14 +152,14 @@ const AddApplicant = () => {
                 })
               }
               placeholder="First name"
-              className="bg-white w-[25rem] pl-4 text-black"
+              className="bg-white w-[25rem] pl-4 text-black border border-solid border-black"
             />
           </div>
           <div className="">
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Last Name</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -169,17 +169,17 @@ const AddApplicant = () => {
                 setRecruiterData({ ...recruiterData, lastname: e.target.value })
               }
               placeholder="Last name"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
         {/* gmail and phone */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Email</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -189,14 +189,14 @@ const AddApplicant = () => {
                 setRecruiterData({ ...recruiterData, email: e.target.value })
               }
               placeholder="Email"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Mobile</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -206,7 +206,7 @@ const AddApplicant = () => {
                 setRecruiterData({ ...recruiterData, phone: e.target.value })
               }
               placeholder="Phone"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -214,10 +214,10 @@ const AddApplicant = () => {
         {/* password and summary */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex ">
           <label htmlFor="">Enter Password</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -227,14 +227,14 @@ const AddApplicant = () => {
                 setRecruiterData({ ...recruiterData, password: e.target.value })
               }
               placeholder="Email"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Summery</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -244,7 +244,7 @@ const AddApplicant = () => {
                 setRecruiterData({ ...recruiterData, profile: e.target.value })
               }
               placeholder="Profile Summary"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -252,13 +252,13 @@ const AddApplicant = () => {
         {/* gender and D.O.B */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Gender</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
-            <div className="bg-white h-12 w-[25rem] rounded">
+            <div className="bg-white h-12 w-[25rem] rounded border border-solid border-black">
               <input
                 type="radio"
                 className="mt-2"
@@ -284,15 +284,15 @@ const AddApplicant = () => {
             </div>
           </div>
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter DOB</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
               type="date"
-              className="w-[25rem] bg-white text-black"
+              className="w-[25rem] bg-white text-black border border-solid border-black"
               value={recruiterData.dob}
               onChange={(e) => handleDobChange(e)}
             />
@@ -301,10 +301,10 @@ const AddApplicant = () => {
         {/* qualification and experience */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Qualification</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -317,14 +317,14 @@ const AddApplicant = () => {
                 })
               }
               placeholder="Qualification"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
           <div>
-          <div className=" flex justify-between">
+          <div className=" flex">
           <label htmlFor="">Enter Experience</label>
               <span>
-                <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "15px" }} />
+                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
               </span>
           </div>
             <input
@@ -337,7 +337,7 @@ const AddApplicant = () => {
                 })
               }
               placeholder="Experience"
-              className="bg-white w-[25rem] text-black"
+              className="bg-white w-[25rem] text-black border border-solid border-black"
             />
           </div>
         </div>
@@ -351,7 +351,7 @@ const AddApplicant = () => {
             <input
               type="file"
               accept=".pdf,.doc,.docx"
-              className="bg-white text-black h-12 w-[40rem] rounded"
+              className="bg-white text-black h-12 w-[40rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setRecruiterData({
                   ...recruiterData,
@@ -360,7 +360,7 @@ const AddApplicant = () => {
               }
             />
             <button
-              className="bg-white text-black border border-2 rounded h-12"
+              className="bg-white text-black border border-2 rounded h-12 "
               onClick={handleImageUpload}
             >
               Upload Image

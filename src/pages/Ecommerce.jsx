@@ -12,7 +12,7 @@ const Ecommerce = () => {
   const { currentColor } = useStateContext();
 
   return (
-    <div className="m-4 bg-teal-100 ">
+    <div className="m-4 bg-sky-100 h-screen rounded">
       <div className="flex flex-wrap lg:flex-nowrap justify-center">
         {/* <div className="bg-white dark:text-gray-200  dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-left">
           <div className="flex justify-between items-center">
@@ -36,7 +36,7 @@ const Ecommerce = () => {
           {earningData.map((item) => (
             <div
               key={item.title}
-              className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl "
+              className="bg-white h-[18rem] dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl "
             >
               <button
                 type="button"
@@ -51,7 +51,7 @@ const Ecommerce = () => {
                   {/* {item.percentage} */}
                 </span>
               </p>
-              <p className="text-sm text-black  mt-1">Client</p>
+              <p className="text-sm text-black  mt-1 font-bold">{item.title}</p>
             </div>
           ))}
         </div>

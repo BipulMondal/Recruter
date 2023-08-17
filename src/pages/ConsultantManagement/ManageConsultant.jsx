@@ -32,7 +32,7 @@ const ManageConsultant = () => {
    const fetchConsultantData = async () => {
     let result = await HttpClient.requestData("consultant", "GET");
 
-    // console.log("client result", result.data)
+    console.log("client_result", result.data)
 
     if (result) {
       let arr = result?.data.map((consultant, index) => {
@@ -73,7 +73,7 @@ const ManageConsultant = () => {
           ),
           Profile: (
             // <div style={{ fontSize: "13px" }}>{consultant?.profile}</div>
-            <img src={consultant?.profile} alt="logo" />
+            <img src={HttpClient.IMG_URL+consultant?.profile} alt="logo" />
 
           ),
           Action: (

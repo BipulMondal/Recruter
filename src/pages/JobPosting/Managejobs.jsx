@@ -23,7 +23,7 @@ const ManageConsultant = () => {
     if (result) {
       let arr = result?.data.map((jobs, index) => {
         return {
-          sl: index + 1,
+          // sl: index + 1,
           Title: (
             <div style={{ fontSize: "13px" }}>
              {jobs?.title}
@@ -33,18 +33,18 @@ const ManageConsultant = () => {
             <div style={{ fontSize: "13px" }}>{jobs?.location}</div>
 
           ),
-          Rate: (
-            <div style={{ fontSize: "13px", width:"15rem" }}>{jobs?.rate}</div>
+          // Rate: (
+          //   <div style={{ fontSize: "13px", width:"15rem" }}>{jobs?.rate}</div>
 
-          ),
+          // ),
           Roles: (
             <div style={{ fontSize: "13px" }}>{jobs?.roles}</div>
 
           ),
-          Requirements: (
-            <div style={{ fontSize: "13px" }}>{jobs?.requiements}</div>
+          // Requirements: (
+          //   <div style={{ fontSize: "13px" }}>{jobs?.requiements}</div>
 
-          ),
+          // ),
           JobStatus: (
             <div style={{ fontSize: "13px" }}>{jobs?.jobStatus}</div>
 
@@ -148,10 +148,10 @@ const ManageConsultant = () => {
 //   };
 
   const columns = [
-    {
-      name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>SL</div>,
-      selector: (row) => row.sl,
-    },
+    // {
+    //   name: <div style={{ fontSize: "14px", fontWeight: "bolder" }}>SL</div>,
+    //   selector: (row) => row.sl,
+    // },
 
     {
       name: (
@@ -169,16 +169,16 @@ const ManageConsultant = () => {
       ),
       selector: (row) => row.Location,
     },
-    {
-      name: (
-        <div
-          style={{ fontSize: "14px", marginLeft: "15px", fontWeight: "bolder" }}
-        >
-          Rate
-        </div>
-      ),
-      selector: (row) => row.Rate,
-    },
+    // {
+    //   name: (
+    //     <div
+    //       style={{ fontSize: "14px", marginLeft: "15px", fontWeight: "bolder" }}
+    //     >
+    //       Rate
+    //     </div>
+    //   ),
+    //   selector: (row) => row.Rate,
+    // },
     {
       name: (
         <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
@@ -187,14 +187,14 @@ const ManageConsultant = () => {
       ),
       selector: (row) => row.Roles,
     },
-    {
-      name: (
-        <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          Requirements
-        </div>
-      ),
-      selector: (row) => row.Requirements,
-    },
+    // {
+    //   name: (
+    //     <div style={{ fontSize: "14px", fontWeight: "bolder" }}>
+    //       Requirements
+    //     </div>
+    //   ),
+    //   selector: (row) => row.Requirements,
+    // },
     {
       name: (
         <div style={{ fontSize: "14px", fontWeight: "bolder" }}>

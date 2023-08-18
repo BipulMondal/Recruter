@@ -27,7 +27,6 @@ const AddApplicant = () => {
   const [selectCategory, setSelectCategory] = useState(null);
   const [selectSubCategory, setSelectSubCategory] = useState(null);
   const [hide, setHide] = useState(false);
-  const [error, setError] = useState("");
 
   //fetch category data
   const fetchCategoryData = async () => {
@@ -91,9 +90,6 @@ const AddApplicant = () => {
   // date of birth
   const handleDobChange = (e) => {
     e.preventDefault();
-
-    const date = e.target.value;
-    // console.log(date);
 
     setApplicantData({
       ...applicantData,
@@ -169,7 +165,7 @@ const AddApplicant = () => {
           location: "",
           profile: "",
           relocate: applicantData.relocate,
-          resume: null,
+          summery: "",
           available_date: "",
         });
       } else {
@@ -182,18 +178,25 @@ const AddApplicant = () => {
   // upload resume
   const handleResumeUpload = async (e) => {
     e.preventDefault();
+
     let data = new FormData();
-    data.append("image", applicantData.resume);
+    data.append("image", applicantData.profile);
+
+    console.log("clicked");
+    console.log("data", data);
+
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
       console.log("upload_resume_data", result);
+
       if (result && result.status) {
-        applicantData.resume = result.data;
+        applicantData.profile = result.data;
         toast.success("Resume Upload Successfully");
       } else {
         toast.error("Resume Can not be uploaded");
       }
     } catch (error) {
+      toast.error("resume upload failed");
       console.log("Error uploading resume", error.message);
     }
   };
@@ -393,7 +396,7 @@ const AddApplicant = () => {
             />
           </div>
         </div>
-        {/* category and subcategory */}
+        {/* skills and subskills */}
         <div className="flex justify-between">
           <div>
             <div className="flex">
@@ -588,6 +591,7 @@ const AddApplicant = () => {
               </span>
             </div>
             <input
+              value={applicantData.available_date}
               type="text"
               className="bg-white text-black h-12 w-[25rem] rounded border border-solid border-black"
               placeholder="Available date"
@@ -613,7 +617,8 @@ const AddApplicant = () => {
             </div>
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
+              // accept=".pdf,.doc,.docx"
+              accept="image/*"
               className="bg-white text-black h-12 w-[40rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setApplicantData({

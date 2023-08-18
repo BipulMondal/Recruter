@@ -100,7 +100,7 @@ const EditConsultant = () => {
   // handle subcategory id
   const handleSubCategoryId = (e) => {
     const subCategoryId = e.target.value;
-    const subCategory = applicantData.sub_category.find(
+    const subCategory = subSkillsData.find(
       (item) => item._id === subCategoryId
     );
     setHide(subCategory === null);

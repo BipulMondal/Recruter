@@ -23,7 +23,7 @@ const ManageCategory = () => {
     let data = {
       categoryID: clientId,
     };
-    console.log("selected id", data)
+    console.log("selected id", data);
 
     let resultStatus = await HttpClient.requestData(
       `category/set-status/${clientId}`,
@@ -33,16 +33,15 @@ const ManageCategory = () => {
 
     console.log("handlechange.....", resultStatus.data.status);
     setCategorydata((prevData) =>
-    prevData.map((client) =>
-      client._id === clientId
-        ? { ...client, status: resultStatus.data.status }
-        : client
-    )
-  );
+      prevData.map((client) =>
+        client._id === clientId
+          ? { ...client, status: resultStatus.data.status }
+          : client
+      )
+    );
 
-  await fetchCategoryData();
+    await fetchCategoryData();
   };
-
 
   const onDelete = async (id) => {
     alert("Are you really want to delete this item ?");
@@ -50,7 +49,7 @@ const ManageCategory = () => {
 
     console.log("ID", id);
 
-    let endPoint = `category/set-status/${id}`;
+    let endPoint = `category/${id}`;
     let result = await HttpClient.requestData(endPoint, "DELETE");
     console.log("DeleteSkills", result);
 
@@ -160,12 +159,12 @@ const ManageCategory = () => {
           ),
           Status: (
             <button
-            className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
-            onClick={() => handleStatusChange(item._id, item.status)}
-          >
-            {item.status ? "inActive" : "Active"}
-          </button>
-          )
+              className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
+              onClick={() => handleStatusChange(item._id, item.status)}
+            >
+              {item.status ? "inActive" : "Active"}
+            </button>
+          ),
         };
       });
       setCategorydata(arr);

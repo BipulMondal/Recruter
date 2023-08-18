@@ -20,7 +20,7 @@ const AddApplicant = () => {
     location: "",
     profile: "",
     relocate: null,
-    resume: null,
+    summery: null,
     available_date: "",
   });
 
@@ -34,9 +34,11 @@ const AddApplicant = () => {
     let result = await HttpClient.requestData("category", "GET");
     // console.log("ApplicantCategoryData", result.data);
     if (result && result.status) {
+      const filterSkills = result.data.filter((item) => item.status === true);
+
       setApplicantData((prevData) => ({
         ...prevData,
-        category: result.data,
+        category: filterSkills,
       }));
     } else {
       toast.error("Error to fetch Category Data");
@@ -75,15 +77,14 @@ const AddApplicant = () => {
     console.log("categoryId for fetch subcategory", categoryId);
 
     if (result && result.status) {
-      try {
-        setApplicantData((prevData) => ({
-          ...prevData,
-          sub_category: result.data,
-        }));
-        console.log("tefchsubcategory.....", result);
-      } catch (error) {
-        console.log(error.message);
-      }
+      const filterSkills = result.data.filter((item) => item.status === true);
+
+      setApplicantData((prevData) => ({
+        ...prevData,
+        sub_category: filterSkills,
+      }));
+    } else {
+      toast.error("Error to fetch Category Data");
     }
   };
 
@@ -119,8 +120,8 @@ const AddApplicant = () => {
       !applicantData.keytech ||
       !applicantData.location ||
       !applicantData.profile ||
-      applicantData.relocate === null ||
-      applicantData.resume === null ||
+      !applicantData.relocate ||
+      !applicantData.summery ||
       !applicantData.available_date
     ) {
       // setError("Fields are required");
@@ -133,14 +134,14 @@ const AddApplicant = () => {
         mobile: applicantData.phone,
         experience: applicantData.experience,
         gender: applicantData.gender,
-        summery: applicantData.profile,
+        summery: applicantData.summery,
         qualification: applicantData.qualification,
         currlocation: applicantData.location,
         keytech: applicantData.keytech,
         keywords: applicantData.keyword,
         dob: applicantData.dob,
         relocate: applicantData.relocate,
-        profile: applicantData.resume,
+        profile: applicantData.profile,
         availableDate: applicantData.available_date,
         categoryid: selectCategory ? selectCategory._id : null,
         subcategoryid: selectSubCategory ? selectSubCategory._id : null,
@@ -566,18 +567,15 @@ const AddApplicant = () => {
                 />
               </span>
             </div>
-            <textarea
-              name=""
-              id=""
-              cols="25"
-              rows="2"
+            <input
+              type="text"
               placeholder="Profile Summary"
-              className="rounded w-[25rem] text-black border border-solid border-black"
-              value={applicantData.profile}
+              className="rounded w-[25rem] text-black border border-solid border-black bg-white text-black"
+              value={applicantData.summery}
               onChange={(e) =>
-                setApplicantData({ ...applicantData, profile: e.target.value })
+                setApplicantData({ ...applicantData, summery: e.target.value })
               }
-            ></textarea>
+            />
           </div>
 
           <div>
@@ -620,7 +618,7 @@ const AddApplicant = () => {
               onChange={(e) =>
                 setApplicantData({
                   ...applicantData,
-                  resume: e.target.files[0],
+                  profile: e.target.files[0],
                 })
               }
             />

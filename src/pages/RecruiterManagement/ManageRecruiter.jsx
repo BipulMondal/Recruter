@@ -36,7 +36,7 @@ const ManageRecruiter = () => {
   const fetchRecruiterdata = async () => {
     let result = await HttpClient.requestData("recruiter", "GET");
 
-    console.log("Recruiter result", result.data);
+    console.log("Recruiterresult", result.data);
 
     if (result) {
       let arr = result?.data.map((recruiter, index) => {
@@ -47,23 +47,11 @@ const ManageRecruiter = () => {
               {recruiter?.firstname + recruiter?.lastname}
             </div>
           ),
-          // LastName: (
-          //   <div style={{ fontSize: "13px" }}>{recruiter?.lastname}</div>
-
-          // ),
           Email: <div style={{ fontSize: "13px" }}>{recruiter?.email}</div>,
           Mobile: <div style={{ fontSize: "13px" }}>{recruiter?.mobile}</div>,
           Experience: (
             <div style={{ fontSize: "13px" }}>{recruiter?.experience}</div>
           ),
-          // Gender: (
-          //   <div style={{ fontSize: "13px" }}>{recruiter?.gender}</div>
-
-          // ),
-          // DOB: (
-          //   <div style={{ fontSize: "13px" }}>{recruiter?.dob}</div>
-
-          // ),
           Summery: <div style={{ fontSize: "13px" }}>{recruiter?.summery}</div>,
           Qualification: (
             <div style={{ fontSize: "13px" }}>{recruiter?.qualification}</div>

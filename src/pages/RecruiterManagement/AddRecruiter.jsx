@@ -10,14 +10,13 @@ const AddApplicant = () => {
     email: "",
     password: "",
     phone: "",
-    gender: null,
+    gender: "",
     dob: "",
     qualification: "",
     experience: "",
     profile: "",
     resume: null,
   });
-
 
   //fetch category data
   const fetchCategoryData = async () => {
@@ -32,23 +31,23 @@ const AddApplicant = () => {
       toast.error("Error to fetch Category Data");
     }
   };
- 
 
-  // date of birth 
+  // date of birth
   const handleDobChange = (e) => {
     e.preventDefault();
 
     setRecruiterData({
       ...recruiterData,
       dob: e.target.value,
-    })
-  }
+    });
+  };
 
   // submit recruiterData
   const handleApplicantSubmit = async (e) => {
     e.preventDefault();
 
-    if(!recruiterData.firstname ||
+    if (
+      !recruiterData.firstname ||
       !recruiterData.lastname ||
       !recruiterData.email ||
       !recruiterData.password ||
@@ -58,9 +57,10 @@ const AddApplicant = () => {
       !recruiterData.profile ||
       !recruiterData.qualification ||
       !recruiterData.dob
-      ){
-        alert(" * field are required")
-      }else{let data = {
+    ) {
+      alert(" * field are required");
+    } else {
+      let data = {
         firstname: recruiterData.firstname,
         lastname: recruiterData.lastname,
         email: recruiterData.email,
@@ -72,35 +72,32 @@ const AddApplicant = () => {
         qualification: recruiterData.qualification,
         dob: recruiterData.dob,
         profile: recruiterData.resume,
-        
       };
-  
+
       console.log(data);
       let result = await HttpClient.requestData("recruiter", "POST", data);
-  
-      if(result && result.status){
-        toast.success("Recruiter Added Successfully")
-        console.log("Recruiter Added Successfully")
+
+      if (result && result.status) {
+        toast.success("Recruiter Added Successfully");
+        console.log("Recruiter Added Successfully");
         setRecruiterData({
           firstname: "",
           lastname: "",
           email: "",
           password: "",
           phone: "",
-          gender: null,
+          gender: "",
           dob: "",
           qualification: "",
           experience: "",
           profile: "",
           resume: null,
-        })
+        });
+      } else {
+        toast.error("Recruiter Added failed");
+        console.log("Recruiter Added failed");
       }
-      else{
-        toast.error("Recruiter Added failed")
-        console.log("Recruiter Added failed")
-      }
-  }
-    
+    }
   };
 
   // upload resume
@@ -113,12 +110,11 @@ const AddApplicant = () => {
     try {
       let result = await HttpClient.fileUplode("uploadFile", "POST", data);
       console.log("upload resume data", result);
-      if(result && result.status) {
-          recruiterData.resume = result.data;
-          toast.success("Image Upload Successfully")
-      }
-      else{
-        toast.error("Image Can not be uploaded")
+      if (result && result.status) {
+        recruiterData.resume = result.data;
+        toast.success("Image Upload Successfully");
+      } else {
+        toast.error("Image Can not be uploaded");
       }
     } catch (error) {
       console.log("Error uploading Image", error.message);
@@ -132,16 +128,21 @@ const AddApplicant = () => {
   return (
     <div className="flex flex-col items-center h-auto w-full justify-center p-2">
       <h1>Add Recruiter</h1>
-      <form action="" className="p-4 rounded w-[58rem] bg-gray-100 border border-2 border-black">
+      <form
+        action=""
+        className="p-4 rounded w-[58rem] bg-gray-100 border border-2 border-black"
+      >
         {/* name */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter First Name</label>
+            <div className=" flex">
+              <label htmlFor="">Enter First Name</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={recruiterData.firstname}
@@ -156,12 +157,14 @@ const AddApplicant = () => {
             />
           </div>
           <div className="">
-          <div className=" flex">
-          <label htmlFor="">Enter Last Name</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Last Name</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={recruiterData.lastname}
@@ -176,12 +179,14 @@ const AddApplicant = () => {
         {/* gmail and phone */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Email</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Email</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="email"
               value={recruiterData.email}
@@ -193,12 +198,14 @@ const AddApplicant = () => {
             />
           </div>
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Mobile</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Mobile</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="Phone"
               value={recruiterData.phone}
@@ -214,12 +221,14 @@ const AddApplicant = () => {
         {/* password and summary */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex ">
-          <label htmlFor="">Enter Password</label>
+            <div className=" flex ">
+              <label htmlFor="">Enter Password</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="password"
               value={recruiterData.password}
@@ -231,12 +240,14 @@ const AddApplicant = () => {
             />
           </div>
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Summery</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Summery</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={recruiterData.profile}
@@ -252,18 +263,20 @@ const AddApplicant = () => {
         {/* gender and D.O.B */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Gender</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Gender</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <div className="bg-white h-12 w-[25rem] rounded border border-solid border-black">
               <input
                 type="radio"
                 className="mt-2"
-                value="Male"
-                checked=""
+                value="male"
+                checked={recruiterData.gender === "male"}
                 onChange={(e) =>
                   setRecruiterData({ ...recruiterData, gender: e.target.value })
                 }
@@ -272,7 +285,8 @@ const AddApplicant = () => {
               <input
                 type="radio"
                 className="ml-2"
-                value="Female"
+                value="female"
+                checked={recruiterData.gender === "female"}
                 onChange={(e) =>
                   setRecruiterData({
                     ...recruiterData,
@@ -284,12 +298,14 @@ const AddApplicant = () => {
             </div>
           </div>
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter DOB</label>
+            <div className=" flex">
+              <label htmlFor="">Enter DOB</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="date"
               className="w-[25rem] bg-white text-black border border-solid border-black"
@@ -301,12 +317,14 @@ const AddApplicant = () => {
         {/* qualification and experience */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Qualification</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Qualification</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={recruiterData.qualification}
@@ -321,12 +339,14 @@ const AddApplicant = () => {
             />
           </div>
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Experience</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Experience</label>
               <span>
-                <GiFlowerStar style={{marginTop: "20px", color: "red", fontSize: "10px"  }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={recruiterData.experience}
@@ -341,7 +361,6 @@ const AddApplicant = () => {
             />
           </div>
         </div>
-
 
         {/* Resume */}
         <div className="flex justify-between">

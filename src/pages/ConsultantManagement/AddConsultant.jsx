@@ -312,7 +312,8 @@ const AddApplicant = () => {
               <input
                 type="radio"
                 className="mt-2"
-                value="Male"
+                value="male"
+                checked={applicantData.gender === "male"}
                 onChange={(e) =>
                   setApplicantData({ ...applicantData, gender: e.target.value })
                 }
@@ -321,7 +322,8 @@ const AddApplicant = () => {
               <input
                 type="radio"
                 className="ml-2"
-                value="Female"
+                value="female"
+                checked={applicantData.gender === "female"}
                 onChange={(e) =>
                   setApplicantData({
                     ...applicantData,
@@ -534,7 +536,8 @@ const AddApplicant = () => {
               <input
                 type="radio"
                 className="mt-2"
-                value="Yes"
+                value="yes"
+                checked={applicantData.relocate === "yes"}
                 onChange={(e) =>
                   setApplicantData({
                     ...applicantData,
@@ -546,7 +549,8 @@ const AddApplicant = () => {
               <input
                 type="radio"
                 className="ml-4"
-                value="No"
+                value="no"
+                checked={applicantData.relocate === "no"}
                 onChange={(e) =>
                   setApplicantData({
                     ...applicantData,

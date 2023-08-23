@@ -32,14 +32,17 @@ const Addjobs = () => {
     let result = await HttpClient.requestData("category", "GET");
     console.log("ApplicantCategoryData", result.data);
     if (result && result.status) {
+      const filterSkills = result.data.filter((item) => item.status === true);
       setJobData((prevData) => ({
         ...prevData,
-        category: result.data,
+        category: filterSkills,
       }));
     } else {
       toast.error("Error to fetch Category Data");
     }
   };
+
+  console.log("jobdata", jobData);
 
   //   fetch subcategory data
   const fetchSubCategoryData = async (categoryId) => {
@@ -49,12 +52,13 @@ const Addjobs = () => {
     );
 
     if (result && result.status) {
+      const filterSkills = result.data.filter((item) => item.status === true);
       try {
         setJobData((prevData) => ({
           ...prevData,
-          subcategory: result.data,
+          subcategory: filterSkills,
         }));
-        console.log("subcategory data", result);
+        console.log("subcategory data", filterSkills);
       } catch (error) {
         console.log(error.message);
       }
@@ -66,11 +70,8 @@ const Addjobs = () => {
     let result = await HttpClient.requestData("client", "GET");
 
     if (result && result.status) {
-      // setJobData((prevData) => ({
-      //   ...prevData,
-      //   client: result.data,
-      // }));
-      setClientData(result.data);
+      const filterSkills = result.data.filter((item) => item.status === true);
+      setClientData(filterSkills);
       console.log("Clientdata", result.data);
     } else {
       console.log("Client data Can not fetch");

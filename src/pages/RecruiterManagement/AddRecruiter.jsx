@@ -369,7 +369,7 @@ const AddApplicant = () => {
             <br />
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
+              accept="image/*"
               className="bg-white text-black h-12 w-[40rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setRecruiterData({

@@ -19,15 +19,16 @@ import { useStateContext } from "./contexts/ContextProvider";
 import AddApplicant from "./pages/ConsultantManagement/AddConsultant";
 import ManageConsultant from "./pages/ConsultantManagement/ManageConsultant";
 import AddRecruiter from "./pages/RecruiterManagement/AddRecruiter";
-import EditRecruiter from "./pages/RecruiterManagement/EditRecruiter"
+import EditRecruiter from "./pages/RecruiterManagement/EditRecruiter";
 import ManageRecruiter from "./pages/RecruiterManagement/ManageRecruiter";
-import EditConsultant from "./pages/ConsultantManagement/EditConsultant"
+import EditConsultant from "./pages/ConsultantManagement/EditConsultant";
 import AddClient from "./pages/ClientManagement/AddClient";
-import EditClient from "./pages/ClientManagement/EditClient"
+import EditClient from "./pages/ClientManagement/EditClient";
 import ManageClient from "./pages/ClientManagement/ManageClient";
 import Addjobs from "./pages/JobPosting/Addjobs";
 import Editjobs from "./pages/JobPosting/Editjobs";
-import Managejobs from "./pages/JobPosting/Managejobs"
+import Managejobs from "./pages/JobPosting/Managejobs";
+import ViewApplicant from "./pages/Applicant/ViewApplicant";
 
 const Dashboard = () => {
   const {
@@ -109,11 +110,14 @@ const Dashboard = () => {
             <Route path="/edit-category" element={<EditCategory />} />
 
             <Route path="/sub-category" element={<SubCategory />} />
-            <Route path="/manage-sub-category" element={<ManageSubCategory />} />
+            <Route
+              path="/manage-sub-category"
+              element={<ManageSubCategory />}
+            />
             <Route path="/edit-sub-category" element={<EditSubCategory />} />
 
             <Route path="/add-applicant" element={<AddApplicant />} />
-            <Route path="/edit-consultant/:id" element={<EditConsultant />}/>
+            <Route path="/edit-consultant/:id" element={<EditConsultant />} />
             <Route path="/manage-consultant" element={<ManageConsultant />} />
 
             <Route path="/add-recruiter" element={<AddRecruiter />} />
@@ -127,7 +131,8 @@ const Dashboard = () => {
             <Route path="/add-jobs" element={<Addjobs />} />
             <Route path="/edit-jobs/:id" element={<Editjobs />} />
             <Route path="/manage-jobs" element={<Managejobs />} />
-            
+
+            <Route path="/view-applicant" element={<ViewApplicant />} />
           </Routes>
         </div>
         <Footer />

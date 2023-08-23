@@ -46,7 +46,6 @@ const EditCategory = () => {
     }
   }, []);
 
-
   const editCategory = async (e) => {
     e.preventDefault();
     setViewLoader(true);
@@ -55,15 +54,15 @@ const EditCategory = () => {
     };
     let endPoint = `category/${id}`;
     console.log("EditCategory ", categoryData);
-    
+
     if (categoryName) {
       let result = await HttpClient.requestData(endPoint, "PUT", categoryData);
       console.log("ResultEdit", result);
       if (result && result.status) {
         setViewLoader(false);
-        toast.success(result.message);
+        toast.success("skill updated successfully");
         setCategoryName("");
-        navigate("/manage-category")
+        navigate("/manage-category");
       } else {
         toast.error(result.message);
         setViewLoader(false);
@@ -73,7 +72,6 @@ const EditCategory = () => {
       toast.error("All Fields Are Required");
     }
   };
-
 
   return (
     <>
@@ -85,12 +83,13 @@ const EditCategory = () => {
           <div class="">
             <label for="exampleInputEmail1" style={{ marginBottom: "12px" }}>
               Skills Name
-            </label><br />
+            </label>
+            <br />
             <input
               type="email"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-              className="bg-white text-black border border-solid border-black" 
+              className="bg-white text-black border border-solid border-black"
               placeholder="Enter Skills"
             />
           </div>

@@ -13,21 +13,19 @@ const AddApplicant = () => {
     profile: "",
   });
 
-
   // submit clientData
   const handleClientSubmit = async (e) => {
     e.preventDefault();
 
-    if(
+    if (
       !clientData.firstname ||
       !clientData.lastname ||
       !clientData.email ||
       !clientData.phone ||
-      !clientData.currlocation 
-    ){
-      alert(" * fileds are required")
-    }
-    else{
+      !clientData.currlocation
+    ) {
+      alert(" * fileds are required");
+    } else {
       let data = {
         firstname: clientData.firstname,
         lastname: clientData.lastname,
@@ -36,14 +34,14 @@ const AddApplicant = () => {
         currlocation: clientData.currlocation,
         profile: clientData.resume,
       };
-  
+
       console.log(data);
       let result = await HttpClient.requestData("client", "POST", data);
-  
+
       if (result && result.status) {
         toast.success("Client Added Successfully");
         console.log("Client Added Successfully");
-  
+
         setClientData({
           firstname: "",
           lastname: "",
@@ -57,7 +55,6 @@ const AddApplicant = () => {
         console.log("Client Added Failed");
       }
     }
-    
   };
 
   // upload resume
@@ -85,16 +82,21 @@ const AddApplicant = () => {
   return (
     <div className="flex flex-col h-auto w-full justify-center items-center p-2">
       <h1>Add Client</h1>
-      <form action="" className="p-4 rounded w-[45rem] bg-gray-100 border border-2 border-black">
+      <form
+        action=""
+        className="p-4 rounded w-[45rem] bg-gray-100 border border-2 border-black"
+      >
         {/* first name */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter First Name</label>
+            <div className=" flex">
+              <label htmlFor="">Enter First Name</label>
               <span>
-                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={clientData.firstname}
@@ -112,12 +114,14 @@ const AddApplicant = () => {
         {/* last name */}
         <div className="flex justify-between">
           <div className="">
-          <div className=" flex">
-          <label htmlFor="">Enter Last Name</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Last Name</label>
               <span>
-                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={clientData.lastname}
@@ -132,12 +136,14 @@ const AddApplicant = () => {
         {/* gmail */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Email</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Email</label>
               <span>
-                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="email"
               value={clientData.email}
@@ -152,12 +158,14 @@ const AddApplicant = () => {
         {/* mobile */}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Mobile</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Mobile</label>
               <span>
-                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="Phone"
               value={clientData.phone}
@@ -173,12 +181,14 @@ const AddApplicant = () => {
         {/* location*/}
         <div className="flex justify-between">
           <div>
-          <div className=" flex">
-          <label htmlFor="">Enter Location</label>
+            <div className=" flex">
+              <label htmlFor="">Enter Location</label>
               <span>
-                 <GiFlowerStar style={{ marginTop: "20px", color: "red", fontSize: "10px" }} />
+                <GiFlowerStar
+                  style={{ marginTop: "20px", color: "red", fontSize: "10px" }}
+                />
               </span>
-          </div>
+            </div>
             <input
               type="text"
               value={clientData.currlocation}
@@ -197,8 +207,8 @@ const AddApplicant = () => {
             <br />
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
-              className="bg-white text-black h-12 w-[32rem] rounded border border-solid border-black" 
+              accept="image/*"
+              className="bg-white text-black h-12 w-[32rem] rounded border border-solid border-black"
               onChange={(e) =>
                 setClientData({
                   ...clientData,

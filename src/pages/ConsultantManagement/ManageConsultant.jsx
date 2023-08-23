@@ -109,7 +109,7 @@ const ManageConsultant = () => {
                 handleStatusChange(consultant._id, consultant.status)
               }
             >
-              {consultant.status ? "inActive" : "Active"}
+              {consultant.status ? "Active" : "InActive"}
             </button>
           ),
         };

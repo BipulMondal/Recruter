@@ -27,6 +27,7 @@ const AddApplicant = () => {
   const [selectCategory, setSelectCategory] = useState(null);
   const [selectSubCategory, setSelectSubCategory] = useState(null);
   const [hide, setHide] = useState(false);
+  const [image, setImage] = useState("");
 
   //fetch category data
   const fetchCategoryData = async () => {
@@ -176,11 +177,15 @@ const AddApplicant = () => {
   };
 
   // upload resume
-  const handleResumeUpload = async (e) => {
-    e.preventDefault();
+  const handleResumeUpload = async (file) => {
+    // e.preventDefault();
+    if (!file) {
+      return;
+    }
 
     let data = new FormData();
-    data.append("image", applicantData.profile);
+    // data.append("image", applicantData.profile);
+    data.append("image", file);
 
     console.log("clicked");
     console.log("data", data);
@@ -621,22 +626,22 @@ const AddApplicant = () => {
             </div>
             <input
               type="file"
-              // accept=".pdf,.doc,.docx"
               accept="image/*"
               className="bg-white text-black h-12 w-[40rem] rounded border border-solid border-black"
-              onChange={(e) =>
-                setApplicantData({
-                  ...applicantData,
-                  profile: e.target.files[0],
-                })
-              }
+              // onChange={(e) =>
+              //   setApplicantData({
+              //     ...applicantData,
+              //     profile: e.target.files[0],
+              //   })
+              // }
+              onChange={(e) => handleResumeUpload(e.target.files[0])}
             />
-            <button
+            {/* <button
               className="bg-white text-black border border-2 rounded h-12 border-black"
               onClick={handleResumeUpload}
             >
               Upload Image
-            </button>
+            </button> */}
           </div>
         </div>
 

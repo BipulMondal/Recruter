@@ -55,7 +55,7 @@ const ManageCategory = () => {
 
     if (result && result.status) {
       setViewLoader(false);
-      toast.success(result.message);
+      // toast.success(result.message);
       fetchCategoryData();
     } else {
       setViewLoader(false);
@@ -162,7 +162,7 @@ const ManageCategory = () => {
               className="h-8 w-18 bg-white border border-black rounded-xl text-black ml-4 font-bold pt-[-4px]"
               onClick={() => handleStatusChange(item._id, item.status)}
             >
-              {item.status ? "inActive" : "Active"}
+              {item.status ? "Active" : "InActive"}
             </button>
           ),
         };

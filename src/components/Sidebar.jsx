@@ -4,9 +4,7 @@ import { useLocation } from "react-router-dom";
 import { SiShopware } from "react-icons/si";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import PopupState from "@mui/icons-material";
 
-// import { links } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 // import { itemClick } from "@syncfusion/ej2/treemap";
 
@@ -163,9 +161,7 @@ const Sidebar = () => {
             </TooltipComponent>
           </div>
 
-          
           <div className="mt-10">
-
             {/* skills  */}
             <div>
               <div
@@ -278,7 +274,7 @@ const Sidebar = () => {
               ) : null}
             </div>
 
-           {/* consultant  */}
+            {/* consultant  */}
             <div>
               <div
                 onClick={() => setToggle2(!toggle2)}
@@ -502,13 +498,13 @@ const Sidebar = () => {
               ) : null}
             </div>
 
-            {/* <div>
+            <div>
               <div
                 onClick={() => setToggle6(!toggle6)}
                 className={`siteBarDiv ${toggle6 ? "handleSidebar" : ""}`}
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                <div name="heading">Primary Varient </div>
+                <div name="heading">Applicant </div>
                 {toggle6 ? (
                   <span style={{ marginTop: "5px" }}>
                     <svg
@@ -547,15 +543,15 @@ const Sidebar = () => {
               </div>
               {toggle6 ? (
                 <div style={{ marginTop: "5px" }} className="swing-in-top-fwd">
-                  <Link to={"/add-primary-varient"} className="linkAn">
-                    Add Primary Varient
+                  <Link to={"/view-applicant"} className="linkAn">
+                    View Applicant
                   </Link>
-                  <Link to={"/manage-primary-varient"} className="linkAn">
+                  {/* <Link to={"/manage-primary-varient"} className="linkAn">
                     Manage Primary Varient
-                  </Link>
+                  </Link> */}
                 </div>
               ) : null}
-            </div> */}
+            </div>
 
             {/* <div>
               <div

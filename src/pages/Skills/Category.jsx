@@ -50,11 +50,10 @@ const Category = () => {
     let categoryData = {
       name: name,
     };
-    if(categoryData.name == ""){
-      toast.error('please fill skill field')
-      console.log("Skills field can not be blank")
-    }
-    else {
+    if (categoryData.name == "") {
+      toast.error("please fill skill field");
+      console.log("Skills field can not be blank");
+    } else {
       let result = await HttpClient.requestData(
         "category",
         "POST",
@@ -64,7 +63,7 @@ const Category = () => {
 
       if (result && result.status) {
         setViewLoader(false);
-        toast.success(result.message);
+        toast.success("Skill Added successfully");
         // let file = document.querySelector("#images");
         // file.value = "";
         setName("");
@@ -80,33 +79,33 @@ const Category = () => {
     <>
       {viewLoader ? <Loader /> : null}
       <div className="flex justify-center mt-20 ">
-      <div className="m-2 md:m-10 p-2 md:p-10 bg-gray-100 border-2 border-black rounded-3xl w-[40rem] flex flex-col justify-center items-center">
-        <Header title="Add Skills" />
-        <form className="flex flex-col items-center ">
-          <div class="">
-            <label for="exampleInputEmail1" style={{ marginBottom: "12px" }}>
-              Skills
-            </label><br />
-            <input
-              type="email"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="bg-white text-black border-2 border-solid border-black"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter Skills"
-
-            />
-          </div>
-          <button
-            class="w-[8rem] rounded mt-4"
-            style={{ backgroundColor: "rgb(3, 201, 215)" }}
-            onClick={(e) => addCategory(e)}
-          >
-            Add Skills
-          </button>
-        </form>
-      </div>
+        <div className="m-2 md:m-10 p-2 md:p-10 bg-gray-100 border-2 border-black rounded-3xl w-[40rem] flex flex-col justify-center items-center">
+          <Header title="Add Skills" />
+          <form className="flex flex-col items-center ">
+            <div class="">
+              <label for="exampleInputEmail1" style={{ marginBottom: "12px" }}>
+                Skills
+              </label>
+              <br />
+              <input
+                type="email"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="bg-white text-black border-2 border-solid border-black"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter Skills"
+              />
+            </div>
+            <button
+              class="w-[8rem] rounded mt-4"
+              style={{ backgroundColor: "rgb(3, 201, 215)" }}
+              onClick={(e) => addCategory(e)}
+            >
+              Add Skills
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

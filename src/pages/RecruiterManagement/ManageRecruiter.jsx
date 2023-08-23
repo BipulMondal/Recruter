@@ -115,7 +115,7 @@ const ManageRecruiter = () => {
                 handleStatusChange(recruiter._id, recruiter.status)
               }
             >
-              {recruiter.status ? "inActive" : "Active"}
+              {recruiter.status ? "Active" : "InActive"}
             </button>
           ),
         };
